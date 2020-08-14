@@ -1,26 +1,64 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import RadiosBox from './components/radiosbox/RadiosBox';
 
-function App() {
+import HeadBar from './components/headbar/HeadBar';
+import TabsBar from './components/tabs/TabsBar';
+import SideContainer from './components/side/SideContainer';
+import DrawerCustomize from './components/radiosbox/DrawerCustomize';
+import {connect} from 'react-redux';
+import {addAudio} from './actions/RadiosAction';
+
+class App extends React.Component {
+
+    componentDidMount(){
+        
+       
+    }
+   
+    render(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={styles.containerBody}>
+        <HeadBar></HeadBar>
+        <TabsBar></TabsBar>
+        <div style={styles.containerBody}>
+            <div style={styles.containerContaint}>
+                {/* <RadiosBox></RadiosBox> */}
+
+            </div>
+            {/* <SideContainer></SideContainer> */}
+        </div>
     </div>
   );
+    }
 }
 
-export default App;
+const styles = {
+    containerBody: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    containerContaint: {
+        display: 'flex',
+        
+    },
+    containerBody: {
+        backgroundColor: 'gray',
+       
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+       radios: state.radiosReducer.radios,
+        audios: state.radiosReducer.audios,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addAudio: (audio) => dispatch(addAudio(audio))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)
+

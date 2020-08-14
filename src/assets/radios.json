@@ -1,0 +1,11 @@
+{
+    "radios": [
+        {"id": 1, "name": "radio 1", "url": "a", "image": "./images/radio.JPG"},
+        {"id": 2, "name": "radio 2", "url": "b", "image": "./images/radio.JPG"},
+        {"id": 3, "name": "radio 3", "url": "c", "image": "./images/radio.JPG"},
+        {"id": 4, "name": "radio 4", "url": "d", "image": "./images/radio.JPG"},
+        {"id": 5, "name": "radio 5", "url": "e", "image": "./images/radio.JPG"}
+       
+    ]
+
+}

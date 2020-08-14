@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'fontsource-roboto';
+import {Provider} from 'react-redux';
+import configureStore from './store';
+import {fetchRadios} from '../src/reducers/radiosReducer';
+
+const store = configureStore()
 
 ReactDOM.render(
-  <React.StrictMode>
+    <Provider store={store}> 
+     <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Provider>
+,
   document.getElementById('root')
 );
 
