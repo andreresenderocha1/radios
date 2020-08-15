@@ -25,7 +25,7 @@ class PlayButton extends React.Component {
     }
       
     togglePlay = (ev) => {
-        setTimeout(()=>console.log(this.props.audios),3000)
+        debugger
             if(this.props.audios.length>0){
                 var founded = false;
                 this.props.audios.map(audio=>{
@@ -44,6 +44,11 @@ class PlayButton extends React.Component {
                                 this.stopAllAudios()
                                 this.props.setAudioToPlay(audio)
                                 this.props.setUrlToPlay(audio.url)
+                                this.props.radios.map(radio=>{
+                                    if(radio.name == ev.target.getAttribute('name')){
+                                        this.props.setUrlToPlay(radio.url)
+                                    }
+                                })
                                 // setTimeout(()=>this.props.audioToPlay.play(),2000)
                             }
                             
@@ -55,12 +60,15 @@ class PlayButton extends React.Component {
                 }else{
                     var audio = new Audio(this.props.radio.url) 
                     audio.classList.add("music-player-audio")    
-                    setTimeout(()=>console.log(audio),3000)       
                     audio.name = this.props.radio.name
                     this.setState({audio:audio})
                     this.stopAllAudios()
                     this.props.setAudioToPlay(audio)
-                    this.props.setUrlToPlay(audio.url)
+                    this.props.radios.map(radio=>{
+                        if(radio.name == ev.target.getAttribute('name')){
+                            this.props.setUrlToPlay(radio.url)
+                        }
+                    })
                     // setTimeout(()=>this.props.audioToPlay.play(),2000)
                     // this.props.audioToPlay.play()
                     this.setState({play:true})
@@ -69,17 +77,19 @@ class PlayButton extends React.Component {
             }else{
                 var audio = new Audio(this.props.radio.url)
                 audio.classList.add("music-player-audio")   
-                setTimeout(()=>console.log(audio),3000)        
                 audio.name = this.props.radio.name
                 this.setState({audio:audio})
                 this.stopAllAudios()
                 this.props.setAudioToPlay(audio)
-                this.props.setUrlToPlay(audio.url)
+                this.props.radios.map(radio=>{
+                    if(radio.name == ev.target.getAttribute('name')){
+                        this.props.setUrlToPlay(radio.url)
+                    }
+                })
                 // setTimeout(()=>this.props.audioToPlay.play(),2000)
                 this.setState({play:true})
                 this.props.addAudio(audio)
             }
-            console.log(audio)
     }
 
     func = ()=>{
@@ -90,7 +100,7 @@ class PlayButton extends React.Component {
     render(){
         return (
           
-                <a href="#" onClick={(ev)=>{this.togglePlay(ev);MyPlayer.playSong(this.props)}}>
+                <a href="#" onClick={(ev)=>{this.togglePlay(ev);setTimeout(()=>MyPlayer.getAudio(),2000) }}>
                 {this.props.children}
                 
             </a>
@@ -120,7 +130,8 @@ const mapStateToProps = (state) => {
        
         audios: state.radiosReducer.audios,
         audioToPlay: state.radiosReducer.audioToPlay,
-        radioPlaying: state.radiosReducer.radioPlaying
+        radioPlaying: state.radiosReducer.radioPlaying,
+        radios: state.radiosReducer.radios
     }
 }
 

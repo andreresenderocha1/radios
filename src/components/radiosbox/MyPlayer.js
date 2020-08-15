@@ -53,32 +53,75 @@ class MyPlayer extends React.Component {
             responsive: true,
           }
 
+          constructor(props) {
+            super(props)
+            this.audio = {}
+            _this = this;
+          }
 
-    constructor(props) {
-        super(props);
-        console.log('oi');
-        this.state = {
+          state = {
+            unmount: false,
             params: {
               ...this.options,
-             
               getAudioInstance: (audio) => {
-                this.setState({audio : audio})
+                this.audio = audio
               },
-            }
-        }
-        _this = this;
+            },
+          }
+        
           
-      }
+      
 
-      getAudio(){
+      static getAudio(){
+          if(!_this.state.params.audioLists){
+            _this.audio.clear()
+            _this.setState({
+                params: {
+                  ..._this.options,  
+                     
+                  audioLists: [
+                    {
+                      name: _this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
+                      singer: 'Brasilia',
+                      cover:
+                        'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
+                        musicSrc:
+                        _this.props.radioPlaying ?_this.props.radioPlaying.url : 'no', 
+                    },   
+                  ],
+                }
+            },()=>{_this.audio.play()})
+          }else{
+            const audioLists2= [
+                {
+                name:_this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
+                singer: 'Brasilia',
+                cover:
+                    'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
+                    musicSrc:
+                    _this.props.radioPlaying ?_this.props.radioPlaying.url : 'no', 
+                },   
+            ]
+
+            _this.audio.appendAudio(1, audioLists2)
+            _this.audio.playNext()
+          }
+        
+          
+
+        
        
           
       }
+      static stopSong(){
+        _this.audio.pause()
+    }
 
       static playSong(props) {
         _this.setState({
             params: {
-              ..._this.options,             
+              ..._this.options,  
+                 
               audioLists: [
                 {
                   name: _this.props.radioPlaying.name,
@@ -90,10 +133,24 @@ class MyPlayer extends React.Component {
                 },   
               ],
             }
+        },()=>{
+            // getAudioInstance: (audio) => {
+            //     this.setState({audio : audio},()=> _this.state.audio.play())
+            //   }      
+            this.state = {
+                params: {
+                  ..._this.options,
+                 
+                  getAudioInstance: (audio) => {
+                    _this.setState({audio : audio},()=>_this.state.audio.play())
+                  },
+                }
+            }
+            
         }
+            
         
           )
-          setTimeout(()=>{console.log(_this.state.params.audioLists);_this.state.audio.play()},4000)
       }
     render(){
         return (
@@ -104,6 +161,7 @@ class MyPlayer extends React.Component {
                 
                 playIndex={0}
               />
+              <button onClick={()=>this.audio.play()}>click</button>
                 </div>
             </>
             

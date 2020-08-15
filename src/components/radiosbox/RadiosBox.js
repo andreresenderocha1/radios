@@ -21,7 +21,6 @@ class RadiosBox extends React.Component{
     componentWillMount(){
         
         this.props.searchRadios(this.props.radios, this.props.genre)      
-        setTimeout(()=>console.log(this.props.audios),2000)
     }
   
     render(){

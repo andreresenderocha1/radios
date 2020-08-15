@@ -24,6 +24,7 @@ import fire from '../../config';
 import wavegif from './images/wave.gif';
 import {connect} from 'react-redux';
 import {setRadioPlaying, stopRadioPlaying} from '../../actions/RadiosAction';
+import MyPlayer from './MyPlayer';
 
 
 
