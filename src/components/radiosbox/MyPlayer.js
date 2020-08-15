@@ -74,6 +74,7 @@ class MyPlayer extends React.Component {
 
       static getAudio(){
           if(!_this.state.params.audioLists){
+              debugger
             _this.audio.clear()
             _this.setState({
                 params: {
@@ -92,6 +93,7 @@ class MyPlayer extends React.Component {
                 }
             },()=>{_this.audio.play()})
           }else{
+              debugger
             const audioLists2= [
                 {
                 name:_this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
@@ -152,6 +154,13 @@ class MyPlayer extends React.Component {
         
           )
       }
+
+      componentDidUpdate(prevProps){
+        if(prevProps.urlToPlay !== this.props.urlToPlay){
+             MyPlayer.getAudio()
+        }
+     }
+
     render(){
         return (
             <>

@@ -92,6 +92,7 @@ class PlayButton extends React.Component {
             }
     }
 
+    
     func = ()=>{
         
     }
@@ -100,7 +101,7 @@ class PlayButton extends React.Component {
     render(){
         return (
           
-                <a href="#" onClick={(ev)=>{this.togglePlay(ev);setTimeout(()=>MyPlayer.getAudio(),2000) }}>
+                <a href="#" onClick={(ev)=>{this.togglePlay(ev); }}>
                 {this.props.children}
                 
             </a>
@@ -131,7 +132,8 @@ const mapStateToProps = (state) => {
         audios: state.radiosReducer.audios,
         audioToPlay: state.radiosReducer.audioToPlay,
         radioPlaying: state.radiosReducer.radioPlaying,
-        radios: state.radiosReducer.radios
+        radios: state.radiosReducer.radios,
+        urlToPlay: state.radiosReducer.urlToPlay
     }
 }
 
