@@ -51,6 +51,7 @@ class MyPlayer extends React.Component {
             autoHiddenCover: false,  
             spaceBar: true,
             responsive: true,
+            
           }
 
           constructor(props) {
@@ -73,8 +74,8 @@ class MyPlayer extends React.Component {
       
 
       static getAudio(){
+        console.log(_this.props.radioPlaying);
           if(!_this.state.params.audioLists){
-              debugger
             _this.audio.clear()
             _this.setState({
                 params: {
@@ -85,7 +86,7 @@ class MyPlayer extends React.Component {
                       name: _this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
                       singer: 'Brasilia',
                       cover:
-                        'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
+                      require('./images/' + _this.props.radioPlaying.name + '.png'),
                         musicSrc:
                         _this.props.radioPlaying ?_this.props.radioPlaying.url : 'no', 
                     },   
@@ -93,72 +94,75 @@ class MyPlayer extends React.Component {
                 }
             },()=>{_this.audio.play()})
           }else{
-              debugger
-            const audioLists2= [
-                {
-                name:_this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
-                singer: 'Brasilia',
-                cover:
-                    'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
-                    musicSrc:
-                    _this.props.radioPlaying ?_this.props.radioPlaying.url : 'no', 
-                },   
-            ]
+           
+            var founded = false;
+            var i;
+            _this.state.params.audioLists.forEach((radio,index)=>{
+                if(radio.name == _this.props.radioPlaying.name){                       
+                    founded = true;
+                    i = index;
+                }
+                
+            })
+            if(!founded){
+                _this.setState({
+                    params: {
+                    ..._this.options,  
+                        
+                    audioLists: [..._this.state.params.audioLists,
+                        {
+                        name: _this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
+                        singer: 'Brasilia',
+                        cover:
+                        require('./images/' + _this.props.radioPlaying.name + '.png'),
+                            musicSrc:
+                            _this.props.radioPlaying ?_this.props.radioPlaying.url : 'no', 
+                        },   
+                    ],
+                    }
+                },()=>{
+                    var a;
+                _this.state.params.audioLists.forEach((radio,index)=>{
+                    debugger
+                        if(radio.name == _this.props.radioPlaying.name){                       
+                            a = index;
+                        }
+                    
+                    })
+                    _this.audio.playByIndex(a)
+                })
+            }else {
+                _this.audio.playByIndex(i)
+            }
 
-            _this.audio.appendAudio(1, audioLists2)
-            _this.audio.playNext()
-          }
-        
-          
 
-        
-       
-          
+            // _this.audio.appendAudio(1, audioList2)
+            console.log(_this.audio)
+            // setTimeout(()=> _this.audio.playNext(),5000)
+            // _this.audio.clear()
+            // _this.audio.playNext()
+          }     
+
       }
+
+
       static stopSong(){
         _this.audio.pause()
-    }
-
-      static playSong(props) {
-        _this.setState({
-            params: {
-              ..._this.options,  
-                 
-              audioLists: [
-                {
-                  name: _this.props.radioPlaying.name,
-                  singer: 'Brasilia',
-                  cover:
-                    'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
-                    musicSrc:
-                    _this.props.radioPlaying.url, 
-                },   
-              ],
-            }
-        },()=>{
-            // getAudioInstance: (audio) => {
-            //     this.setState({audio : audio},()=> _this.state.audio.play())
-            //   }      
-            this.state = {
-                params: {
-                  ..._this.options,
-                 
-                  getAudioInstance: (audio) => {
-                    _this.setState({audio : audio},()=>_this.state.audio.play())
-                  },
-                }
-            }
-            
-        }
-            
-        
-          )
       }
 
-      componentDidUpdate(prevProps){
-        if(prevProps.urlToPlay !== this.props.urlToPlay){
+  
+      componentDidUpdate(prevProps, prevState){
+         console.log(prevProps)
+         console.log(this.props)
+        if(prevProps.audioToPlay.name !== this.props.audioToPlay.name ){
              MyPlayer.getAudio()
         }
+
+       
+
+        
+
+        
      }
 
     render(){

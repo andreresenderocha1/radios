@@ -16,5 +16,8 @@ code {
 
 .react-jinke-music-player-main .glass-bg {
     position: absolute;
-    left: 200px;
+}
+
+.play-sounds {
+    display: inline!important;
 }

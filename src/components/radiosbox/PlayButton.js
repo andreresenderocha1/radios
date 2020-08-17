@@ -25,7 +25,6 @@ class PlayButton extends React.Component {
     }
       
     togglePlay = (ev) => {
-        debugger
             if(this.props.audios.length>0){
                 var founded = false;
                 this.props.audios.map(audio=>{

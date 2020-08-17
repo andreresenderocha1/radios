@@ -7,6 +7,7 @@ import SideContainer from './components/side/SideContainer';
 import DrawerCustomize from './components/radiosbox/DrawerCustomize';
 import {connect} from 'react-redux';
 import {addAudio} from './actions/RadiosAction';
+import MyPlayer from './components/radiosbox/MyPlayer';
 
 class App extends React.Component {
 
@@ -20,6 +21,7 @@ class App extends React.Component {
     <div style={styles.containerBody}>
         <HeadBar></HeadBar>
         <TabsBar></TabsBar>
+        <MyPlayer></MyPlayer>
         <div style={styles.containerBody}>
             <div style={styles.containerContaint}>
                 {/* <RadiosBox></RadiosBox> */}

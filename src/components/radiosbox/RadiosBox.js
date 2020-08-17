@@ -33,7 +33,7 @@ class RadiosBox extends React.Component{
                 return <CardRadio key={Math.random()} radio={radio} ></CardRadio>
             })}
             <div name="classsss" style={{width:400,height:400}}>
-            <MyPlayer></MyPlayer>
+            
             </div>
              
 
