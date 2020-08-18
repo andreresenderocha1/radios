@@ -6,14 +6,21 @@ import TabsBar from './components/tabs/TabsBar';
 import SideContainer from './components/side/SideContainer';
 import DrawerCustomize from './components/radiosbox/DrawerCustomize';
 import {connect} from 'react-redux';
-import {addAudio} from './actions/RadiosAction';
+import {addAudio, setUser} from './actions/RadiosAction';
 import MyPlayer from './components/radiosbox/MyPlayer';
+import fire from './config';
 
 class App extends React.Component {
 
     componentDidMount(){
-        
+        this.authListener()
        
+    }
+
+    authListener(){
+        fire.auth().onAuthStateChanged((user)=>{
+            this.props.setUser(user);
+        })
     }
    
     render(){
@@ -58,7 +65,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addAudio: (audio) => dispatch(addAudio(audio))
+        addAudio: (audio) => dispatch(addAudio(audio)),
+        setUser: (user) => dispatch(setUser(user))
     }
 }
 

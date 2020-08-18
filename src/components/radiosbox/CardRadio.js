@@ -164,7 +164,8 @@ class CardRadio extends React.Component {
       });      
 }
 
- showWave = (ev)=>{      
+ showWave = (ev)=>{  
+    console.log(fire.auth().currentUser)    
      
      var images = document.getElementsByClassName('images')
       Array.prototype.forEach.call(images, function(image) {      

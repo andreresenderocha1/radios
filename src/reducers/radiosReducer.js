@@ -9,7 +9,8 @@ const initialState = {
     radioPlaying: {},
     audioToPlay: {},
     urlToPlay: '',
-    playMusic: false
+    playMusic: false,
+    user: {}
 }
 
 
@@ -71,6 +72,12 @@ const radiosReducer =  (state = initialState, action) => {
                 ...state,
                 playMusic: action.payload
                 }
+                case "SET_USER":
+            
+                    return { 
+                    ...state,
+                    user: action.payload
+                    }
             
         
       default:

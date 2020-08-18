@@ -11,6 +11,7 @@ const DB_CONFIG = {
     measurementId: "G-JFJDKWSHQ5"
   };
 
-  const fire = firebase.initializeApp(DB_CONFIG);
+  export default firebase.initializeApp(DB_CONFIG);
 
-  export default fire.database().ref();
+
+  

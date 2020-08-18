@@ -22,7 +22,7 @@ class RadiosFavoritasBox extends React.Component {
     }
    
     getRadios(){      
-        fire.child('Andre').child('RadiosFavoritas').on('value', snapshot=>{  
+        fire.database().ref().child(fire.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{  
             var array = []
             snapshot.forEach(item=>{  
                            

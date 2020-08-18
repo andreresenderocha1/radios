@@ -31,7 +31,7 @@ class FavoritoIcon extends React.Component {
 
     componentDidMount(){
         
-        fire.child('Andre').child('RadiosFavoritas').on('value', snapshot=>{
+        fire.database().ref().child(fire.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{
             const radios = snapshot.val();
             
             if(radios != null){
@@ -50,11 +50,11 @@ class FavoritoIcon extends React.Component {
         
         <a href="#" onClick={()=>{
             if(this.state.isChecked){
-                fire.child('Andre').child(`RadiosFavoritas/${this.state.key}`).remove();
+                fire.database().ref().child(fire.auth().currentUser.uid).child(`RadiosFavoritas/${this.state.key}`).remove();
               
                 
             }else{
-                fire.child("Andre").child("RadiosFavoritas").push({id:this.props.id, name: this.props.name})
+                fire.database().ref().child(fire.auth().currentUser.uid).child("RadiosFavoritas").push({id:this.props.id, name: this.props.name})
             }
            
             this.setState({ isChecked: !this.state.isChecked })}}>

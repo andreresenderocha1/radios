@@ -47,9 +47,14 @@ export const setPlayMusic = (bol) => ({
     payload: bol
 });
 
+export const setUser = (user) => ({
+    type: "SET_USER",
+    payload: user
+});
+
 export const fetchRadios = ()=>{
     return (dispatch)=>{
-        fire.child('radios').on('value', snapshot=>{
+        fire.database().ref().child('radios').on('value', snapshot=>{
             var radiosArray = []
             var audiosArray = []
             Object.keys(snapshot.val()).map(radio=>{

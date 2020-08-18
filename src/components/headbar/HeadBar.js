@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Styl} from 'react-dom';
 import SearchInput from './SearchInput';
+import Login from '../radiosbox/Login';
+
 
 class HeadBar extends React.Component {
   
@@ -9,6 +11,7 @@ class HeadBar extends React.Component {
             <div style={styles.headBarContainer} >
                 <span style={styles.logoName}>Radios Brasil</span>
                 <SearchInput></SearchInput>
+                <Login></Login>
             </div>
         );
     }
