@@ -1,4 +1,4 @@
-import fire from '../config';
+import firebase from 'firebase';
 
 
 export const searchRadiosSuccess = (radiosArray) => ({
@@ -52,9 +52,14 @@ export const setUser = (user) => ({
     payload: user
 });
 
+export const closeLoginPopup = (bol) => ({
+    type: "CLOSE_LOGIN_POPUP",
+    payload: bol
+});
+
 export const fetchRadios = ()=>{
     return (dispatch)=>{
-        fire.database().ref().child('radios').on('value', snapshot=>{
+        firebase.database().ref().child('radios').on('value', snapshot=>{
             var radiosArray = []
             var audiosArray = []
             Object.keys(snapshot.val()).map(radio=>{

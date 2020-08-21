@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Styl} from 'react-dom';
 import StarIcon from '@material-ui/icons/Star';
 import StarBorder from '@material-ui/icons/StarBorder';
-import fire from '../../config';
+import firebase from 'firebase';
 
 import styled from 'styled-components'
 import * as Regular from '@styled-icons/boxicons-regular'
@@ -30,8 +30,8 @@ class FavoritoIcon extends React.Component {
     } 
 
     componentDidMount(){
-        
-        fire.database().ref().child(fire.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{
+        if(firebase.auth().currentUser){
+        firebase.database().ref().child(firebase.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{
             const radios = snapshot.val();
             
             if(radios != null){
@@ -42,7 +42,7 @@ class FavoritoIcon extends React.Component {
                     }
                 })
             }
-        })
+        })}
     }
   
     render() {
@@ -50,11 +50,11 @@ class FavoritoIcon extends React.Component {
         
         <a href="#" onClick={()=>{
             if(this.state.isChecked){
-                fire.database().ref().child(fire.auth().currentUser.uid).child(`RadiosFavoritas/${this.state.key}`).remove();
+                firebase.database().ref().child(firebase.auth().currentUser.uid).child(`RadiosFavoritas/${this.state.key}`).remove();
               
                 
             }else{
-                fire.database().ref().child(fire.auth().currentUser.uid).child("RadiosFavoritas").push({id:this.props.id, name: this.props.name})
+                firebase.database().ref().child(firebase.auth().currentUser.uid).child("RadiosFavoritas").push({id:this.props.id, name: this.props.name})
             }
            
             this.setState({ isChecked: !this.state.isChecked })}}>

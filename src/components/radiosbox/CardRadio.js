@@ -20,7 +20,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStateWithCallback from 'use-state-with-callback';
 import PlayButton from './PlayButton';
 import FavoritoIcon from './FavoritoIcon';
-import fire from '../../config';
+import firebase from 'firebase';
 import wavegif from './images/wave.gif';
 import {connect} from 'react-redux';
 import {setRadioPlaying, stopRadioPlaying} from '../../actions/RadiosAction';
@@ -165,7 +165,7 @@ class CardRadio extends React.Component {
 }
 
  showWave = (ev)=>{  
-    console.log(fire.auth().currentUser)    
+    console.log(firebase.auth().currentUser)    
      
      var images = document.getElementsByClassName('images')
       Array.prototype.forEach.call(images, function(image) {      

@@ -4,7 +4,6 @@ import Radio from './Radio';
 import CardRadio from './CardRadio';
 import DrawerCustomize from './DrawerCustomize';
 import data from '../../assets/radios.json';
-import fire from '../../config';
 import { render } from '@testing-library/react';
 import {connect} from 'react-redux';
 import {fetchRadios, searchRadios, initializeAudios} from '../../actions/RadiosAction';

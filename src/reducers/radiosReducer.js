@@ -1,4 +1,3 @@
-import fire from '../config';
 import {getAllRadios} from '../actions/RadiosAction';
 
 
@@ -10,7 +9,8 @@ const initialState = {
     audioToPlay: {},
     urlToPlay: '',
     playMusic: false,
-    user: {}
+    user: {},
+    loginPopupFlag: true
 }
 
 
@@ -77,6 +77,12 @@ const radiosReducer =  (state = initialState, action) => {
                     return { 
                     ...state,
                     user: action.payload
+                    }
+                    case "CLOSE_LOGIN_POPUP":
+            
+                    return { 
+                    ...state,
+                    loginPopupFlag: action.payload
                     }
             
         

@@ -4,7 +4,7 @@ import Radio from './Radio';
 import CardRadio from './CardRadio';
 import DrawerCustomize from './DrawerCustomize';
 import data from '../../assets/radios.json';
-import fire from '../../config';
+import firebase from 'firebase';
 import {connect} from 'react-redux';
 import {fetchRadios} from '../../actions/RadiosAction';
 
@@ -22,7 +22,7 @@ class RadiosFavoritasBox extends React.Component {
     }
    
     getRadios(){      
-        fire.database().ref().child(fire.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{  
+        firebase.database().ref().child(firebase.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{  
             var array = []
             snapshot.forEach(item=>{  
                            
