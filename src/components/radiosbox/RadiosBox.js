@@ -10,11 +10,11 @@ import {fetchRadios, searchRadios, initializeAudios} from '../../actions/RadiosA
 import MyPlayer from './MyPlayer';
 
 
-
+var _this;
 class RadiosBox extends React.Component{ 
     constructor(props){
         super(props)
-
+        _this = this;
     }
 
     componentWillMount(){
@@ -29,7 +29,7 @@ class RadiosBox extends React.Component{
                 
             {
             this.props.radiosSearched.map(function(radio){
-                return <CardRadio key={Math.random()} radio={radio} ></CardRadio>
+                return <CardRadio cliquei={()=>_this.props.cliquei()} key={Math.random()} radio={radio} ></CardRadio>
             })}
             <div name="classsss" style={{width:400,height:400}}>
             

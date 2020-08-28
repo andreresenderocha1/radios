@@ -73,8 +73,8 @@ class MyPlayer extends React.Component {
           
       
 
-      static getAudio(){
-        console.log(_this.props.radioPlaying);
+      static getAudio(name){
+          debugger
           if(!_this.state.params.audioLists){
             _this.audio.clear()
             _this.setState({
@@ -97,10 +97,18 @@ class MyPlayer extends React.Component {
            
             var founded = false;
             var i;
+            var igual = false;
             _this.state.params.audioLists.forEach((radio,index)=>{
-                if(radio.name == _this.props.radioPlaying.name){                       
+                debugger
+                if(_this.props.radioPlaying && radio.name == _this.props.radioPlaying.name){                       
                     founded = true;
                     i = index;
+                }else if(!_this.props.radioPlaying){
+                    if(radio.name == name){
+                        founded = true;
+                        i = index;
+                        igual = true
+                    }
                 }
                 
             })
@@ -123,7 +131,6 @@ class MyPlayer extends React.Component {
                 },()=>{
                     var a;
                 _this.state.params.audioLists.forEach((radio,index)=>{
-                    debugger
                         if(radio.name == _this.props.radioPlaying.name){                       
                             a = index;
                         }
@@ -132,7 +139,7 @@ class MyPlayer extends React.Component {
                     _this.audio.playByIndex(a)
                 })
             }else {
-                _this.audio.playByIndex(i)
+                igual ? _this.audio.play() : _this.audio.playByIndex(i)
             }
 
 
@@ -157,24 +164,25 @@ class MyPlayer extends React.Component {
         if(prevProps.audioToPlay.name !== this.props.audioToPlay.name ){
              MyPlayer.getAudio()
         }
+     }
 
-       
-
-        
-
-        
+     static stopAudio(){
+         _this.audio.pause()
      }
 
     render(){
         return (
             <>
+            
             <div style={{width:400,height:400}}>
+            <button style={{position:'absolute',left:'400px',width:400,height:400}} onClick={()=>this.audio.pause()}>stop</button>
               <ReactJkMusicPlayer 
                 {..._this.state.params}
                 
-                playIndex={0}
+                // playIndex={0}
               />
               <button onClick={()=>this.audio.play()}>click</button>
+              
                 </div>
             </>
             

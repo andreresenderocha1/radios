@@ -22,6 +22,9 @@ firebase.initializeApp({
   });
 
 
+   function update(){
+       alert('a')
+   }
 
 class App extends React.Component {
 
@@ -37,13 +40,17 @@ class App extends React.Component {
             this.props.setUser(user);
         })
     }
+
+    updateChild(){
+        update()
+    }
    
     render(){
   return (
     <div style={styles.containerBody}>
         <HeadBar></HeadBar>
-        <TabsBar></TabsBar>
-        <MyPlayer></MyPlayer>
+        <TabsBar cliquei={()=>alert('a')}></TabsBar>
+        <MyPlayer cliquei={()=>alert('a')}></MyPlayer>
         <div style={styles.containerBody}>
             <div style={styles.containerContaint}>
                 {/* <RadiosBox></RadiosBox> */}

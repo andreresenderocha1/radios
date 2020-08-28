@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabsBar() {
+export default function TabsBar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState('one');
@@ -84,7 +84,7 @@ export default function TabsBar() {
           </AppBar>
 
           <TabPanel style={{overflowY:'auto',overflowX: 'hidden'}} value={value} index="one">
-        <RadiosBox genre=''></RadiosBox>
+        <RadiosBox cliquei={()=>props.cliquei()} genre=''></RadiosBox>
       </TabPanel>
       <TabPanel value={value} index="two">
         <RadiosFavoritasBox></RadiosFavoritasBox>

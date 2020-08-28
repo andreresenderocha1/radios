@@ -13,7 +13,7 @@ import InputSenha from './InputSenha';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Popup } from 'semantic-ui-react'
 
-
+var _this;
 class Login extends React.Component { 
 
    
@@ -27,6 +27,8 @@ class Login extends React.Component {
             email: "",
             password: ""
         }     
+        _this = this;
+
     }
 
     login(e){
@@ -55,7 +57,10 @@ class Login extends React.Component {
     googleLogin(){
         var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider).then((result)=>{
+            console.log('oii')
             console.log(result)
+            console.log(firebase.auth().currentUser.displayName)
+            window.location.reload(false);
         }).catch((error)=>console.log( error))
     }
 
@@ -77,10 +82,10 @@ class Login extends React.Component {
                 <h1 style={styles.txtLogin}>Login</h1>
                 <hr/>
                 <div style={styles.containerButtons}>
-                    <a href="#" style={{textDecoration: 'none'}} onClick={this.facebookLogin}>
+                    <a href="#" style={{textDecoration: 'none'}} onClick={()=>{this.props.cliquei();this.facebookLogin()}}>
                         <FacebookButton />
                     </a>
-                    <a href="#" style={{textDecoration: 'none'}} onClick={this.googleLogin}>
+                    <a href="#" style={{textDecoration: 'none'}} onClick={()=>{this.props.cliquei();this.googleLogin()}}>
                         <GoogleButton />
                     </a>
                 </div>
@@ -93,7 +98,6 @@ class Login extends React.Component {
                     <a href="#" style={{textDecoration: 'none'}} onClick={this.login}>
                         <LoginButton />
                     </a>
-                    <button onClick={()=>this.props.closeLoginPopup(false)}>sdlfjslkdfs</button>
                 </div>
                 <hr/>
                

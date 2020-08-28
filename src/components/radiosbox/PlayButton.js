@@ -4,21 +4,23 @@ import {connect} from 'react-redux';
 import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic} from '../../actions/RadiosAction';
 import MyPlayer from './MyPlayer';
 
+var _this;
 class PlayButton extends React.Component {
     
 
     constructor(props){
         super(props)
-        this.state = {play: false, audio: null}
-       
+        this.state = {play: false, audio: null, radioAtualPlaying: false}
+        _this = this
     }
     
     componentDidMount(){
         
        
     }
-    
-    stopAllAudios(){
+
+      
+     stopAllAudios(){
         this.props.audios.map(audio=>{
             audio.pause()
         })
@@ -27,7 +29,7 @@ class PlayButton extends React.Component {
     togglePlay = (ev) => {
             if(this.props.audios.length>0){
                 var founded = false;
-                this.props.audios.map(audio=>{
+                this.props.audios.map(audio=>{                    
                     if(ev.target.getAttribute('name')==audio.name){
                         founded = true
                     }
@@ -38,11 +40,13 @@ class PlayButton extends React.Component {
                         if(audio.name == ev.target.getAttribute('name')){
                             if(this.props.radioPlaying && audio.name == this.props.radioPlaying.name){
                                 this.stopAllAudios()
-                                audio.pause()
+                                // audio.pause()
+                                MyPlayer.stopAudio()  
                             }else{
                                 this.stopAllAudios()
                                 this.props.setAudioToPlay(audio)
-                                this.props.setUrlToPlay(audio.url)
+                                // this.props.setUrlToPlay(audio.url)
+                                MyPlayer.getAudio(ev.target.getAttribute('name'))
                                 this.props.radios.map(radio=>{
                                     if(radio.name == ev.target.getAttribute('name')){
                                         this.props.setUrlToPlay(radio.url)

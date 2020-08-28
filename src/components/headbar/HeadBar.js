@@ -6,7 +6,10 @@ import { Button, Popup } from 'semantic-ui-react';
 import Login from '../radiosbox/Login';
 import {connect} from 'react-redux';
 import {closeLoginPopup} from '../../actions/RadiosAction';
+import firebase from 'firebase';
 
+
+var _this;
 class HeadBar extends React.Component {
 
     // const [eventsEnabled, setEventsEnabled] = React.useState(true)
@@ -17,14 +20,19 @@ class HeadBar extends React.Component {
         this.state = {
             open: false
         }
+        _this = this;
     }
 
     componentDidUpdate(previousProps, previousState) {
-        console.log(this.state.open)
         if (previousProps.loginPopupFlag !== this.props.loginPopupFlag) {
             console.log('entrei')
             
         }
+    }
+
+    handle(){
+        
+        
     }
 
    render(){
@@ -33,20 +41,22 @@ class HeadBar extends React.Component {
         <div style={styles.headBarContainer} >
             <span style={styles.logoName}>Radios Brasil</span>
             <SearchInput></SearchInput>
+    <p style={{color:'white'}}>{firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null}</p>
             <div style={styles.containerPopup}>
                 <Popup
                     trigger={<Button icon='add' />}
-                    content={<Login />}
+                    content={<Login cliquei={()=>{this.setState({open: false})}}/>}
                     basic
                     on='click'
                     pinned
                     style={styles.popup}
+                    open={this.state.open}
                     onClose={() => this.setState({open: false})}
                     onOpen={() => this.setState({open: true})}
                 />
             </div> 
                
-            <button onClick={()=>this.setState({open: false})}>sdffsdf</button>        
+            
         </div>
     );
 }

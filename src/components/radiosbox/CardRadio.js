@@ -186,7 +186,7 @@ class CardRadio extends React.Component {
  render(){
   return (
     <Card style={styles.root} >
-      <PlayButton radio={this.props.radio} >
+      <PlayButton cliquei={()=>this.props.cliquei()} radio={this.props.radio} >
           <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.hideWave(ev);this.props.stopRadioPlaying()}}  style={this.state.wave ? styles.displayTrue:  styles.displayFalse} class='images'  alt="wave"/>
       
         <CardMedia
