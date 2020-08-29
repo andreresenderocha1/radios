@@ -5,8 +5,9 @@ import 'semantic-ui-css/semantic.min.css';
 import { Button, Popup } from 'semantic-ui-react';
 import Login from '../radiosbox/Login';
 import {connect} from 'react-redux';
-import {closeLoginPopup} from '../../actions/RadiosAction';
+import {closeLoginPopup, fetchRadios} from '../../actions/RadiosAction';
 import firebase from 'firebase';
+import TestSearch from './TestSearch';
 
 
 var _this;
@@ -23,11 +24,9 @@ class HeadBar extends React.Component {
         _this = this;
     }
 
-    componentDidUpdate(previousProps, previousState) {
-        if (previousProps.loginPopupFlag !== this.props.loginPopupFlag) {
-            console.log('entrei')
+    componentDidMount() {
+            this.props.fetchRadios()
             
-        }
     }
 
     handle(){
@@ -40,7 +39,10 @@ class HeadBar extends React.Component {
     return (
         <div style={styles.headBarContainer} >
             <span style={styles.logoName}>Radios Brasil</span>
-            <SearchInput></SearchInput>
+            {/* <SearchInput></SearchInput> */}
+      
+            <TestSearch></TestSearch>
+        
     <p style={{color:'white'}}>{firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null}</p>
             <div style={styles.containerPopup}>
                 <Popup
@@ -69,17 +71,17 @@ const styles = {
         top: '40px'
     },
     headBarContainer: {
-        background: '#202020',
+        background: 'rgb(0,0,0,0.76)',
         width: '100%',
         height: 60,
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'baseline'
+        alignItems: 'center'
 
     },
     logoName: {
         color: 'white',
-        fontSize: '37px',
+        fontSize: '20px',
         marginLeft: 80
     },
     containerPopup: {
@@ -88,15 +90,14 @@ const styles = {
 }
 const mapStateToProps = (state) => {
     return {
-       
-        
+        searchedRadios: state.radiosReducer.searchedRadios,
         loginPopupFlag: state.radiosReducer.loginPopupFlag
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        
+        fetchRadios: () => dispatch(fetchRadios()),
         closeLoginPopup: (bol) => dispatch(closeLoginPopup(bol))
     }
 }

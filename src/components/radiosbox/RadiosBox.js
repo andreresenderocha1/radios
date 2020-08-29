@@ -8,6 +8,7 @@ import { render } from '@testing-library/react';
 import {connect} from 'react-redux';
 import {fetchRadios, searchRadios, initializeAudios} from '../../actions/RadiosAction';
 import MyPlayer from './MyPlayer';
+import TestSearch from '../headbar/TestSearch';
 
 
 var _this;
@@ -34,7 +35,6 @@ class RadiosBox extends React.Component{
             <div name="classsss" style={{width:400,height:400}}>
             
             </div>
-             
 
             </div>
     );
@@ -49,7 +49,7 @@ const styles = {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',       
-        marginLeft: 228,
+        marginLeft: 260,
         
         
     }

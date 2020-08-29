@@ -174,8 +174,6 @@ class MyPlayer extends React.Component {
         return (
             <>
             
-            <div style={{width:400,height:400}}>
-            <button style={{position:'absolute',left:'400px',width:400,height:400}} onClick={()=>this.audio.pause()}>stop</button>
               <ReactJkMusicPlayer 
                 {..._this.state.params}
                 
@@ -183,7 +181,7 @@ class MyPlayer extends React.Component {
               />
               <button onClick={()=>this.audio.play()}>click</button>
               
-                </div>
+            
             </>
             
         )    

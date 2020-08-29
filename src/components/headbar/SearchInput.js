@@ -10,6 +10,7 @@ import DirectionsIcon from '@material-ui/icons/Directions';
 import {connect} from 'react-redux';
 import {searchRadiosAction} from '../../actions/RadiosAction';
 import {fetchRadios, searchRadios, addAudio} from '../../actions/RadiosAction';
+import SearchBar from "material-ui-search-bar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +21,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 518
   },
   input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
+    width: '500px',
+    height: '41px',
+    borderRadius: '2px',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    border: '1px solid #777777',
+    color: 'white'
   },
   iconButton: {
     padding: 10,
@@ -44,20 +49,27 @@ const  SearchInput = (props)=> {
  
 
   return (
-    <Paper component="form" className={classes.root}>
+      <div>
+          <SearchBar placeholder="Pesquisar" className={classes.input}
+          searchIcon={<SearchIcon style={{ color: 'grey' }} />}
+   
+    
+  />
+      </div>
+    // <Paper component="form" className={classes.root}>
       
-      <InputBase
-        className={classes.input}
-        placeholder="a"
-        inputProps={{ 'aria-label': 'search google maps' }}
-        onChange={(ev)=>props.searchRadios(props.radios, ev.target.value)}
-      />
-      <IconButton  type="submit" className={classes.iconButton} aria-label="search">
-        <SearchIcon />
-      </IconButton>
+    //   <InputBase
+    //     className={classes.input}
+    //     placeholder="a"
+    //     inputProps={{ 'aria-label': 'search google maps' }}
+    //     onChange={(ev)=>props.searchRadios(props.radios, ev.target.value)}
+    //   />
+    //   <IconButton  type="submit" className={classes.iconButton} aria-label="search">
+    //     <SearchIcon />
+    //   </IconButton>
       
       
-    </Paper>
+    // </Paper>
   );
 }
 

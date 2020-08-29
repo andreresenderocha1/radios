@@ -67,7 +67,7 @@ export default function TabsBar(props) {
   return (
     <BrowserRouter>
         <div className={classes.root}>
-          <AppBar style={{marginLeft:240}} position="static" color="default">
+          <AppBar style={{marginLeft:285}} position="static" color="default">
             <Tabs
               value={value}
               onChange={handleChange}

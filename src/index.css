@@ -16,8 +16,35 @@ code {
 
 .react-jinke-music-player-main .glass-bg {
     position: absolute;
+    height: 95% !important;
+    top: 60px !important;
 }
 
 .play-sounds {
     display: inline!important;
+}
+
+.react-jinke-music-player-mobile-header-right svg{
+    display: none;
+}
+
+.react-jinke-music-player-mobile-progress .duration{
+    display: none !important;
+}
+
+.ui.search>.results .result .image{
+    float: left !important;
+}
+
+.ui.search>.results .result .price {
+    margin-right: -84px;
+    color: red !important;
+}
+
+.ui.grid {
+    width: 328px;
+}
+
+.ui.input {
+    width: 100%;
 }

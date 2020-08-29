@@ -73,7 +73,6 @@ const styles = {
         
     },
     containerBody: {
-        backgroundColor: 'gray',
        
     }
 }
