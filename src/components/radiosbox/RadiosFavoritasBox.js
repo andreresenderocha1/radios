@@ -61,13 +61,12 @@ class RadiosFavoritasBox extends React.Component {
 
 const styles = {
     radiosContainer: {
-        width: '91%',
         height: 907,
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-around',
+        justifyContent: 'start',
         paddingTop: 17,
-        marginLeft: 228
+        marginLeft: 288
         
     }
 }

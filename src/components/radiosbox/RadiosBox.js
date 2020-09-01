@@ -44,12 +44,11 @@ class RadiosBox extends React.Component{
 
 const styles = {
     radiosContainer: {
-        width: '91%',
         height:  994, 
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-around',       
-        marginLeft: 260,
+        justifyContent: 'start',       
+        marginLeft: 288,
         
         
     }

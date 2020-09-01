@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Styl} from 'react-dom';
 import {connect} from 'react-redux';
-import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, closeLoginPopup} from '../../actions/RadiosAction';
+import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, closeLoginPopup, setUser} from '../../actions/RadiosAction';
 import MyPlayer from './MyPlayer';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -12,9 +12,11 @@ import InputUsuario from './InputUsuario';
 import InputSenha from './InputSenha';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Popup } from 'semantic-ui-react'
+import Avatar from '@material-ui/core/Avatar';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 var _this;
-class Login extends React.Component { 
+class Profile extends React.Component { 
 
    
     constructor(props){
@@ -28,6 +30,7 @@ class Login extends React.Component {
             password: ""
         }     
         _this = this;
+        
 
     }
 
@@ -67,39 +70,35 @@ class Login extends React.Component {
     facebookLogin(){
         var provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().signInWithPopup(provider).then((result)=>{
-            console.log(result)
+            
         }).catch((error)=>console.log( error))
     }
     
-    componentDidMount(){
-    } 
-
+    changeBackground(e) {
+        e.target.style.background = 'lightgray';
+      }
+      changeBack(e) {
+        e.target.style.background = 'white';
+      }
     render(){
         return ( 
 
             
            <div>        
-                <h1 style={styles.txtLogin}>Login</h1>
+               <div style={{display:'flex'}}>
+                    <Avatar style={{cursor:'pointer',marginRight:'30px',background:'white'}} alt="Remy Sharp" src={ this.props.user.photoURL || 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'} />
+                    <div style={{display:'flex',flexDirection:'column'}}>
+                        <span style={{fontWeigth:'bold'}}>{this.props.user.displayName}</span>
+                        <span>{this.props.user.email}</span>
+                    </div>
+                </div>
                 <hr/>
-                <div style={styles.containerButtons}>
-                    <a href="#" style={{textDecoration: 'none'}} onClick={()=>{this.props.cliquei();this.facebookLogin()}}>
-                        <FacebookButton />
-                    </a>
-                    <a href="#" style={{textDecoration: 'none'}} onClick={()=>{this.props.cliquei();this.googleLogin()}}>
-                        <GoogleButton />
-                    </a>
+                <div onClick={() => this.props.setUser(null)} onMouseOver={this.changeBackground} onMouseLeave={this.changeBack} style={styles.itemProfile}>
+                     <ExitToAppIcon style={{marginLeft:'15px'}} fontSize="big" />
+                     <span style={{marginLeft:'10px'}}>Sair</span>
                 </div>
-
-                <div style={styles.containerInputs}>
-                    <InputUsuario />
-                    <InputSenha />
-                </div>    
-                <div>
-                    <a href="#" style={{textDecoration: 'none'}} onClick={this.login}>
-                        <LoginButton />
-                    </a>
-                </div>
-                <hr/>   
+               {/* <button onClick={()=>console.log(this.props.user)}></button> */}
+                 
             </div>
 
         );
@@ -107,6 +106,17 @@ class Login extends React.Component {
 }
 
 const styles = {
+    itemProfile: {
+        cursor:'pointer',
+        display: 'flex',
+        paddingTop:'10px',
+         paddingBottom:'10px',
+         marginLeft: '-14px',
+         width: '110.5%',
+         zIndex: '99999'
+         
+        
+    },
     containerPopup: {
         width: '500px',
         height: '400px',
@@ -140,7 +150,8 @@ const styles = {
             audioToPlay: state.radiosReducer.audioToPlay,
             radioPlaying: state.radiosReducer.radioPlaying,
             radios: state.radiosReducer.radios,
-            urlToPlay: state.radiosReducer.urlToPlay
+            urlToPlay: state.radiosReducer.urlToPlay,
+            user: state.radiosReducer.user
         }
     }
 
@@ -151,9 +162,10 @@ const styles = {
             setAudioToPlay: (audio) => dispatch(setAudioToPlay(audio)),
             setUrlToPlay: (url) => dispatch(setUrlToPlay(url)),
             setPlayMusic: (bol) => dispatch(setPlayMusic(bol)),
-            closeLoginPopup: (bol) => dispatch(closeLoginPopup(bol))
+            closeLoginPopup: (bol) => dispatch(closeLoginPopup(bol)),
+            setUser: (user) => dispatch(setUser(user))
         }
     }
 
-    export default connect(mapStateToProps,mapDispatchToProps)(Login)
+    export default connect(mapStateToProps,mapDispatchToProps)(Profile)
 

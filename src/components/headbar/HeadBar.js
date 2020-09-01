@@ -4,10 +4,12 @@ import SearchInput from './SearchInput';
 import 'semantic-ui-css/semantic.min.css';
 import { Button, Popup } from 'semantic-ui-react';
 import Login from '../radiosbox/Login';
+import Profile from '../radiosbox/Profile';
 import {connect} from 'react-redux';
 import {closeLoginPopup, fetchRadios} from '../../actions/RadiosAction';
 import firebase from 'firebase';
 import TestSearch from './TestSearch';
+import Avatar from '@material-ui/core/Avatar';
 
 
 var _this;
@@ -21,11 +23,14 @@ class HeadBar extends React.Component {
         this.state = {
             open: false
         }
+        console.log()
         _this = this;
+
+        
     }
 
     componentDidMount() {
-            this.props.fetchRadios()
+            this.props.fetchRadios()            
             
     }
 
@@ -39,15 +44,12 @@ class HeadBar extends React.Component {
     return (
         <div style={styles.headBarContainer} >
             <span style={styles.logoName}>Radios Brasil</span>
-            {/* <SearchInput></SearchInput> */}
       
             <TestSearch></TestSearch>
-        
-    <p style={{color:'white'}}>{firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null}</p>
-            <div style={styles.containerPopup}>
-                <Popup
-                    trigger={<Button icon='add' />}
-                    content={<Login cliquei={()=>{this.setState({open: false})}}/>}
+            
+            <Popup
+                    trigger={<Avatar style={{cursor:'pointer',marginRight:'30px',background:'white'}} alt="Remy Sharp" src={ this.props.user? this.props.user.photoURL : 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'} />}
+                    content={this.props.user ?<Profile cliquei={()=>{this.setState({open: false})}}/> : <Login cliquei={()=>{this.setState({open: false})}}/>}
                     basic
                     on='click'
                     pinned
@@ -56,8 +58,6 @@ class HeadBar extends React.Component {
                     onClose={() => this.setState({open: false})}
                     onOpen={() => this.setState({open: true})}
                 />
-            </div> 
-               
             
         </div>
     );
@@ -91,7 +91,8 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         searchedRadios: state.radiosReducer.searchedRadios,
-        loginPopupFlag: state.radiosReducer.loginPopupFlag
+        loginPopupFlag: state.radiosReducer.loginPopupFlag,
+        user: state.radiosReducer.user
     }
 }
 

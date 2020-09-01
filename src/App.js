@@ -87,7 +87,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addAudio: (audio) => dispatch(addAudio(audio)),
-        setUser: (user) => dispatch(setUser(user))
+        setUser: (user) => dispatch(setUser(user)),
     }
 }
 
