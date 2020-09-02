@@ -57,3 +57,8 @@ code {
     margin-left: 85px!important;
     margin-top: 17px;
 }
+
+.MuiPaper-elevation4{
+    box-shadow: none!important;
+}
+

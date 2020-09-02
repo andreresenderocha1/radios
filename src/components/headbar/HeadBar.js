@@ -67,8 +67,9 @@ class HeadBar extends React.Component {
 
 const styles = {
     popup: {
-        left: '-285px',
-        top: '40px'
+        left: '-328px',
+        top: '40px',
+        padding: 0
     },
     headBarContainer: {
         background: 'rgb(0,0,0,0.76)',

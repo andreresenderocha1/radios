@@ -15,8 +15,8 @@ export default function GoogleButton() {
 const styles = {
     facebookButton: {
         fontSize: '30px',
-        width: '205px',
-        height: '42px',
+        width: '100%',
+        height: '33px',
         textAlign: 'center',
         textDecoration: 'none',
         margin: '5px 2px',

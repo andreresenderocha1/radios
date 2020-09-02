@@ -80,6 +80,14 @@ class Profile extends React.Component {
       changeBack(e) {
         e.target.style.background = 'white';
       }
+
+      logout(){
+        firebase.auth().signOut().then(()=>{
+            this.props.setUser(null);
+            window.location.reload(false);
+            this.props.cliquei();
+        });
+      }
     render(){
         return ( 
 
@@ -93,7 +101,7 @@ class Profile extends React.Component {
                     </div>
                 </div>
                 <hr/>
-                <div onClick={() => this.props.setUser(null)} onMouseOver={this.changeBackground} onMouseLeave={this.changeBack} style={styles.itemProfile}>
+                <div onClick={() => this.logout()} onMouseOver={this.changeBackground} onMouseLeave={this.changeBack} style={styles.itemProfile}>
                      <ExitToAppIcon style={{marginLeft:'15px'}} fontSize="big" />
                      <span style={{marginLeft:'10px'}}>Sair</span>
                 </div>

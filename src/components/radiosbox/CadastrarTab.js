@@ -1,24 +1,25 @@
-import React, {Component} from 'react';
-import {Styl} from 'react-dom';
-import {connect} from 'react-redux';
-import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, closeLoginPopup} from '../../actions/RadiosAction';
-import MyPlayer from './MyPlayer';
-import firebase from 'firebase';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import React from 'react';
+import PropTypes from 'prop-types';
+import SwipeableViews from 'react-swipeable-views';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import FacebookButton from './FacebookButton';
 import GoogleButton from './GoogleButton';
 import LoginButton from './LoginButton';
 import InputUsuario from './InputUsuario';
 import InputSenha from './InputSenha';
-import 'semantic-ui-css/semantic.min.css'
-import { Button, Popup } from 'semantic-ui-react'
-import TabLogin from './TabLogin'
+import firebase from 'firebase';
+import { Icon, Input } from 'semantic-ui-react'
+
+
 
 
 var _this;
-class Login extends React.Component { 
-
-   
+class CadastrarTab extends React.Component {
     constructor(props){
         super(props)  
         this.login = this.login.bind(this)
@@ -73,23 +74,39 @@ class Login extends React.Component {
     
     componentDidMount(){
     } 
-
+  
     render(){
-        return ( 
-            <div>
-              <div style={{width:'100%', height:'50px', background:'lightgray'}}>
-
-</div>
-                <TabLogin cliquei={()=>this.props.cliquei()}/>
+  return (
+    <div>        
+        <hr style={styles.linha}/>
+               <div style={styles.containerInputs}>
+                <Input iconPosition='left' placeholder='Email'>
+                    <Icon name='user' />
+                    <input />
+                </Input>
+                <Input iconPosition='left' placeholder='Senha'>
+                    <Icon name='lock' />
+                    <input />
+                </Input>
+                 <a href="#" style={styles.buttonLogin} onClick={this.login}>
+                     <LoginButton title='Cadastrar' />
+                 </a>
                 
-            </div>
-    
-
-        );
+             </div>
+         </div>
+  );
     }
 }
 
+
 const styles = {
+    linha: {
+        width: '256px', 
+        borderTop: '1px solid #cecece',
+        borderBottom: 'none',
+        borderRight: 'none',
+        borderLeft: 'none',        
+    },
     containerPopup: {
         width: '500px',
         height: '400px',
@@ -105,39 +122,16 @@ const styles = {
     },
     containerButtons: {
         display: 'flex',
-        justifyContent: 'space-around'        
-        
+        justifyContent: 'space-around'
     },
     containerInputs: {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        padding: '35px'
     }
     
 }
 
-    const mapStateToProps = (state) => {
-        return {
-        
-            audios: state.radiosReducer.audios,
-            audioToPlay: state.radiosReducer.audioToPlay,
-            radioPlaying: state.radiosReducer.radioPlaying,
-            radios: state.radiosReducer.radios,
-            urlToPlay: state.radiosReducer.urlToPlay
-        }
-    }
-
-    const mapDispatchToProps = (dispatch) => {
-        return {
-            initializeAudios: () => dispatch(initializeAudios()),
-            addAudio: (audio) => dispatch(addAudio(audio)),
-            setAudioToPlay: (audio) => dispatch(setAudioToPlay(audio)),
-            setUrlToPlay: (url) => dispatch(setUrlToPlay(url)),
-            setPlayMusic: (bol) => dispatch(setPlayMusic(bol)),
-            closeLoginPopup: (bol) => dispatch(closeLoginPopup(bol))
-        }
-    }
-
-    export default connect(mapStateToProps,mapDispatchToProps)(Login)
-
+export default CadastrarTab;
