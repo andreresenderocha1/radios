@@ -193,7 +193,7 @@ class CardRadio extends React.Component {
             name={this.props.radio.name}
             onClick={(ev)=>{this.showWave(ev);this.props.setRadioPlaying(this.props.radio)}}
             style={styles.media}
-            image={require('./images/' + this.props.radio.name + '.png')}
+            image={require('../../assets/radios-logos/' + this.props.radio.name + '.jpg')}
             title="Paella dish"
         />
       </PlayButton>

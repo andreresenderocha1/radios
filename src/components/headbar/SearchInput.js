@@ -49,27 +49,27 @@ const  SearchInput = (props)=> {
  
 
   return (
-      <div>
-          <SearchBar placeholder="Pesquisar" className={classes.input}
-          searchIcon={<SearchIcon style={{ color: 'grey' }} />}
+//       <div>
+//           <SearchBar placeholder="Pesquisar" className={classes.input}
+//           searchIcon={<SearchIcon style={{ color: 'grey' }} />}
    
     
-  />
-      </div>
-    // <Paper component="form" className={classes.root}>
+//   />
+    //   </div>
+    <Paper component="form" className={classes.root}>
       
-    //   <InputBase
-    //     className={classes.input}
-    //     placeholder="a"
-    //     inputProps={{ 'aria-label': 'search google maps' }}
-    //     onChange={(ev)=>props.searchRadios(props.radios, ev.target.value)}
-    //   />
-    //   <IconButton  type="submit" className={classes.iconButton} aria-label="search">
-    //     <SearchIcon />
-    //   </IconButton>
+      <InputBase
+        className={classes.input}
+        placeholder="a"
+        inputProps={{ 'aria-label': 'search google maps' }}
+        onChange={(ev)=>props.searchRadios(props.radios, ev.target.value)}
+      />
+      <IconButton  type="submit" className={classes.iconButton} aria-label="search">
+        <SearchIcon />
+      </IconButton>
       
       
-    // </Paper>
+    </Paper>
   );
 }
 

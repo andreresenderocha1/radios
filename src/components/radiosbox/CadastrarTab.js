@@ -42,16 +42,18 @@ class CadastrarTab extends React.Component {
     }
 
     signup(e){
-        e.preventDefault()
+        console.log('oi')
         console.log(this.state.email)
         console.log(this.state.password)
+        e.preventDefault()
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(result => {
             console.log(result)
+        }).catch(error => {
+            console.log(error)
         })
     }
 
     handleChange(e){
-       
         this.setState({
             [e.target.name] : e.target.value
         })
@@ -80,15 +82,15 @@ class CadastrarTab extends React.Component {
     <div>        
         <hr style={styles.linha}/>
                <div style={styles.containerInputs}>
-                <Input iconPosition='left' placeholder='Email'>
+                <Input iconPosition='left' name='email' placeholder='Email' onChange={(e)=>this.handleChange(e)}>
                     <Icon name='user' />
                     <input />
                 </Input>
-                <Input iconPosition='left' placeholder='Senha'>
+                <Input iconPosition='left' name='password' placeholder='Senha' onChange={(e)=>this.handleChange(e)}>
                     <Icon name='lock' />
                     <input />
                 </Input>
-                 <a href="#" style={styles.buttonLogin} onClick={this.login}>
+                 <a href="#" style={styles.buttonLogin} onClick={this.signup}>
                      <LoginButton title='Cadastrar' />
                  </a>
                 

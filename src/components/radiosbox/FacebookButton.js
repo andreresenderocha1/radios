@@ -6,8 +6,10 @@ export default function FacebookButton() {
 
   return (
     <div style={styles.facebookButton}>
+        <div>
         <FontAwesomeIcon style={styles.facebookIcon} icon={faFacebookF} />
-        <span style={styles.txtFacebook}>Facebook Login</span>
+        </div>
+        <span style={styles.txtFacebook}>Facebook</span>
     </div>
   );
 }
@@ -23,9 +25,9 @@ const styles = {
         background: '#3B5998',
         color: 'white',
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
-        borderRadius: '7px'
+        borderRadius: '2px'
     },
     txtFacebook: {
         fontSize: '18px'

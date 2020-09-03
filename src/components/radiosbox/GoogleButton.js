@@ -7,7 +7,7 @@ export default function GoogleButton() {
   return (
     <div style={styles.facebookButton}>
         <FontAwesomeIcon style={styles.facebookIcon} icon={faGoogle} />
-        <span style={styles.txtFacebook}>Google Login</span>
+        <span style={styles.txtFacebook}>Google</span>
     </div>
   );
 }
@@ -23,14 +23,14 @@ const styles = {
         background: 'rgb(199,46,27)',
         color: 'white',
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
-        borderRadius: '7px'
+        borderRadius: '2px'
     },
     txtFacebook: {
         fontSize: '18px'
     },
     facebookIcon: {
-        fontSize: '26px'
+        fontSize: '22px'
     }
 }

@@ -24,7 +24,7 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
-        borderRadius: '7px'
+        borderRadius: '2px'
     },
     txtFacebook: {
         fontSize: '18px'

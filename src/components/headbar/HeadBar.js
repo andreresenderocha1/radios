@@ -45,10 +45,12 @@ class HeadBar extends React.Component {
         <div style={styles.headBarContainer} >
             <span style={styles.logoName}>Radios Brasil</span>
       
-            <TestSearch></TestSearch>
-            
+            {/* <TestSearch></TestSearch> */}
+            <SearchInput></SearchInput>
+            <div style={{display:'flex', alignItems:'center', minWidth:'300px', justifyContent:'flex-end'}}>
+            {this.props.user?<span style={{marginRight: '10px',color:'#c7c7c7'}}>{this.props.user.email}</span>:null}
             <Popup
-                    trigger={<Avatar style={{cursor:'pointer',marginRight:'30px',background:'white'}} alt="Remy Sharp" src={ this.props.user? this.props.user.photoURL : 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'} />}
+                    trigger={<Avatar style={{alignSelf: 'flex-end',cursor:'pointer',marginRight:'30px',background:'white'}} alt="Remy Sharp" src={ this.props.user? (this.props.user.photoURL ?  this.props.user.photoURL : 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png') : 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'} />}
                     content={this.props.user ?<Profile cliquei={()=>{this.setState({open: false})}}/> : <Login cliquei={()=>{this.setState({open: false})}}/>}
                     basic
                     on='click'
@@ -58,6 +60,8 @@ class HeadBar extends React.Component {
                     onClose={() => this.setState({open: false})}
                     onOpen={() => this.setState({open: true})}
                 />
+                
+            </div>
             
         </div>
     );
@@ -69,7 +73,8 @@ const styles = {
     popup: {
         left: '-328px',
         top: '40px',
-        padding: 0
+        padding: 0,
+        // minWidth: '267px'
     },
     headBarContainer: {
         background: 'rgb(0,0,0,0.76)',

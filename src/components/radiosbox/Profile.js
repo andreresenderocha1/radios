@@ -92,10 +92,10 @@ class Profile extends React.Component {
         return ( 
 
             
-           <div>        
+           <div style={{minWidth:'267px'}}>        
                <div style={{display:'flex'}}>
                     <Avatar style={{cursor:'pointer',marginRight:'30px',background:'white'}} alt="Remy Sharp" src={ this.props.user.photoURL || 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'} />
-                    <div style={{display:'flex',flexDirection:'column'}}>
+                    <div style={{display:'flex',flexDirection:'column',justifyContent: 'center'}}>
                         <span style={{fontWeigth:'bold'}}>{this.props.user.displayName}</span>
                         <span>{this.props.user.email}</span>
                     </div>
@@ -119,8 +119,6 @@ const styles = {
         display: 'flex',
         paddingTop:'10px',
          paddingBottom:'10px',
-         marginLeft: '-14px',
-         width: '110.5%',
          zIndex: '99999'
          
         

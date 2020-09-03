@@ -28,30 +28,40 @@ class LoginTab extends React.Component {
         
         this.state = {
             email: "",
-            password: ""
+            senha: "",
+            emailFail: false
         }     
         _this = this;
 
     }
 
     login(e){
+        console.log('oi')
         e.preventDefault()
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(result => {
             console.log(result)
+            this.props.cliquei();
+            window.location.reload(false);
+
+        }).catch(error => {
+            console.log(error)
+            this.setState({emailFail: true})
         })
     }
 
     signup(e){
         e.preventDefault()
-        console.log(this.state.email)
-        console.log(this.state.password)
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(result => {
             console.log(result)
         })
     }
 
     handleChange(e){
-       
+        console.log(this.state.email)
+        console.log(this.state.password)
+        if(this.state.emailFail){
+            this.setState({emailFail: false})
+        }
         this.setState({
             [e.target.name] : e.target.value
         })
@@ -80,18 +90,22 @@ class LoginTab extends React.Component {
     <div>        
             
              <hr style={styles.linha}/>
+             {this.state.emailFail? 
+             <div style={{textAlign: 'center'}} >
+                 <span style={{color: 'red', fontWeight:'bold'}}>Email ou senha invalidos!</span>
+             </div>:null
+             }
              
-
              <div style={styles.containerInputs}>
-                <Input iconPosition='left' placeholder='Email'>
+                <Input style={{marginBottom: '5px'}} onChange={(e)=> this.handleChange(e)} name='email' iconPosition='left' placeholder='Email'>
                     <Icon name='user' />
                     <input />
                 </Input>
-                <Input iconPosition='left' placeholder='Senha'>
+                <Input iconPosition='left' type='password' onChange={(e)=> this.handleChange(e)} name='password' placeholder='Senha'>
                     <Icon name='lock' />
                     <input />
                 </Input>
-                 <a href="#" style={styles.buttonLogin} onClick={this.login}>
+                 <a href="#" style={styles.buttonLogin} onClick={(e)=>{this.login(e)}}>
                      <LoginButton title='Login' />
                  </a>
                  <a href="#" style={{textAlign:'right'}}>
