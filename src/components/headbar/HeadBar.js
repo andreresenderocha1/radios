@@ -43,6 +43,16 @@ class HeadBar extends React.Component {
     
     return (
         <div style={styles.headBarContainer} >
+            <button style={{display:'none'}} onClick={()=>firebase.database().ref().child("radios").push(
+          {
+              id:39,
+              name:'Atlantida',
+              genre:'pop_genre',
+              country: 'Brasil',
+              city: 'Rio Grande do Sul',
+              url: 'http://42747t.lp.azioncdn.net/2747t/a/mp4:access_options/rtmp-live/atl_poa.sdp/playlist.m3u8?wowzasessionid=845863069'
+        })}> cadastrar</button>
+
             <span style={styles.logoName}>Radios Brasil</span>
       
             {/* <TestSearch></TestSearch> */}

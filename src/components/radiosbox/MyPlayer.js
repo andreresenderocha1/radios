@@ -51,6 +51,33 @@ class MyPlayer extends React.Component {
             autoHiddenCover: false,  
             spaceBar: true,
             responsive: true,
+            // quando audio carrega mas tb pega o inicio (verificar)
+            onAudioPlay(audioInfo) {
+                // alert('after loading radio')
+              },
+
+              //clicou em outra radio... nao a que esta rodando
+              onAudioPlayTrackChange(currentPlayId, audioLists, audioInfo) {
+                  var audios = document.getElementsByTagName('audio');
+                  console.log(audios)
+                console.log('changed',audioInfo.name)
+                document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
+                _this.audio.pause()
+              },
+
+              onCoverClick(mode, audioLists, audioInfo) {
+                console.log('onCoverClick: ', mode, audioLists, audioInfo)
+              },
+
+              onAudioPause(audioInfo) {
+                console.log('audio pause', audioInfo)
+              document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
+              },
+
+              onAudioPlay(audioInfo) {
+                console.log('audio play', audioInfo)
+              document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'inline';
+              },
             
           }
 
@@ -74,7 +101,6 @@ class MyPlayer extends React.Component {
       
 
       static getAudio(name){
-          debugger
           if(!_this.state.params.audioLists){
             _this.audio.clear()
             _this.setState({
@@ -86,7 +112,7 @@ class MyPlayer extends React.Component {
                       name: _this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
                       singer: 'Brasilia',
                       cover:
-                      require('./images/' + _this.props.radioPlaying.name + '.png'),
+                      require('../../assets/radios-logos/' + _this.props.radioPlaying.name + '.jpg'),
                         musicSrc:
                         _this.props.radioPlaying ?_this.props.radioPlaying.url : 'no', 
                     },   
@@ -99,7 +125,6 @@ class MyPlayer extends React.Component {
             var i;
             var igual = false;
             _this.state.params.audioLists.forEach((radio,index)=>{
-                debugger
                 if(_this.props.radioPlaying && radio.name == _this.props.radioPlaying.name){                       
                     founded = true;
                     i = index;
@@ -122,7 +147,7 @@ class MyPlayer extends React.Component {
                         name: _this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
                         singer: 'Brasilia',
                         cover:
-                        require('./images/' + _this.props.radioPlaying.name + '.png'),
+                        require('../../assets/radios-logos/' + _this.props.radioPlaying.name + '.jpg'),
                             musicSrc:
                             _this.props.radioPlaying ?_this.props.radioPlaying.url : 'no', 
                         },   

@@ -18,15 +18,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     height: 32,
-    marginRight: 518
+    marginRight: 56
   },
   input: {
     width: '500px',
     height: '41px',
     borderRadius: '2px',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    border: '1px solid #777777',
-    color: 'white'
   },
   iconButton: {
     padding: 10,

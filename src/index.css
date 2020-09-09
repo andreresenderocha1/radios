@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap');
+
+
 body {
+    
   background-color: #f3f3f3;
   overflow: hidden;
   margin: 0;

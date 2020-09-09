@@ -63,6 +63,7 @@ class FavoritoIcon extends React.Component {
             :<Regular.Heart size={28} color='lightgray'/>
             
           }
+          
           </a>
 
           

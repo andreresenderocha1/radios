@@ -95,10 +95,15 @@ const styles = {
         marginTop: 20
     },
     name: {
-        fontSize: 14
+        fontSize: 16,
+        fontFamily: "'Josefin Sans', cursive",
+        fontWeigh: '300',
+        marginBottom: '-4px'
     },
     local: {
-        fontSize: 14
+        fontSize: 14,
+        fontFamily: "'Josefin Sans', cursive",
+        color: 'gray'
     },
     wave: {
         width: 192,
@@ -178,6 +183,7 @@ class CardRadio extends React.Component {
    
 }
  hideWave = (ev)=>{ 
+     console.log(ev.target)
     ev.target.parentNode.firstChild.style.display = 'none'
     this.setState({wave:false})
    
@@ -204,14 +210,15 @@ class CardRadio extends React.Component {
 
         <div style={styles.info}>  
             <span style={styles.name}>{this.props.radio.name}</span>
-            <span style={styles.local}>{this.props.radio.city + ', ' +this.props.radio.country}</span>
+            <span style={styles.local}>{this.props.radio.city }</span>
         </div>
         <div>  
             <FavoritoIcon action={this.props.action} name={this.props.radio.name}  id={this.props.radio.id}/> 
         </div>
       </div>
+      
           
-       
+      
         
       </CardActions>
      
