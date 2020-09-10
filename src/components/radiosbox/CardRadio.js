@@ -130,11 +130,12 @@ const styles = {
   
   };  
   
-
+var _this;
 class CardRadio extends React.Component {      
     constructor(props) {
         super(props);  
         this.state = {wave: false}  
+        _this = this;
       } 
 
        isEmpty(obj) {
@@ -145,14 +146,16 @@ class CardRadio extends React.Component {
         return true;
     }
 
+    
       componentDidMount(){
           if(!this.isEmpty(this.props.radioPlaying)){
               var radioPlaying = this.props.radioPlaying;
+              
             var images = document.getElementsByClassName('images')
             
                 Array.prototype.forEach.call(images, function(image) {      
                    if (image.name == radioPlaying.name){
-                       image.style.display = 'inline'
+                    //   image.style.display = 'inline'                     
                    }
         
                 });     
@@ -170,16 +173,16 @@ class CardRadio extends React.Component {
 }
 
  showWave = (ev)=>{  
-    console.log(firebase.auth().currentUser)    
+    // console.log(firebase.auth().currentUser)    
      
-     var images = document.getElementsByClassName('images')
-      Array.prototype.forEach.call(images, function(image) {      
+    //  var images = document.getElementsByClassName('images')
+    //   Array.prototype.forEach.call(images, function(image) {      
         
-        image.style.display = 'none'
+    //     image.style.display = 'none'
         
-      });
-      ev.target.parentNode.firstChild.style.display = 'inline'
-      this.setState({wave:true})
+    //   });
+    //   ev.target.parentNode.firstChild.style.display = 'inline'
+    //   this.setState({wave:true})
    
 }
  hideWave = (ev)=>{ 
@@ -189,20 +192,23 @@ class CardRadio extends React.Component {
    
 }
 
+
+
  render(){
   return (
     <Card style={styles.root} >
       <PlayButton cliquei={()=>this.props.cliquei()} radio={this.props.radio} >
-          <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.hideWave(ev);this.props.stopRadioPlaying()}}  style={this.state.wave ? styles.displayTrue:  styles.displayFalse} class='images'  alt="wave"/>
+          <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.props.stopRadioPlaying()}}  style={styles.displayFalse} class='images'  alt="wave"/>
       
         <CardMedia
             name={this.props.radio.name}
-            onClick={(ev)=>{this.showWave(ev);this.props.setRadioPlaying(this.props.radio)}}
+            onClick={(ev)=>{this.props.setRadioPlaying(this.props.radio)}}
             style={styles.media}
             image={require('../../assets/radios-logos/' + this.props.radio.name + '.jpg')}
             title="Paella dish"
         />
       </PlayButton>
+      
      
       <CardActions style={styles.actionsButtons} disableSpacing>
       
@@ -215,6 +221,7 @@ class CardRadio extends React.Component {
         <div>  
             <FavoritoIcon action={this.props.action} name={this.props.radio.name}  id={this.props.radio.id}/> 
         </div>
+        {/* <button onClick={()=>document.getElementsByName('Jovem Pan')[0].parentNode.firstChild.style.display = 'inline'}>click</button> */}
       </div>
       
           
@@ -230,6 +237,7 @@ class CardRadio extends React.Component {
 const mapStateToProps = (state) => {
     return {
         radioPlaying: state.radiosReducer.radioPlaying,
+        audioToPlay: state.radiosReducer.audioToPlay
     }
 }
 

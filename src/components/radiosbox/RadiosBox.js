@@ -18,8 +18,36 @@ class RadiosBox extends React.Component{
         _this = this;
     }
 
-    componentWillMount(){
+    isEmpty(obj) {
+        for(var key in obj) {
+            if(obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    }
+
+    componentDidUpdate(oldValue, newValue){
+        console.log('old = ',oldValue.radioPlaying.name)
+        console.log('new = ',this.props.radioPlaying.name)
         
+        if(oldValue.radioPlaying.name == this.props.radioPlaying.name){
+        if(!this.isEmpty(this.props.radioPlaying)){
+            var radioPlaying = this.props.radioPlaying;
+            
+          var images = document.getElementsByClassName('images')
+          
+              Array.prototype.forEach.call(images, function(image) {      
+                 if (image.name == radioPlaying.name){
+                    image.style.display = 'inline'                     
+                 }
+      
+              });     
+            }
+        }
+    }
+
+    componentDidMount(){
+       
         this.props.searchRadios(this.props.radios, this.props.genre)      
     }
   
@@ -59,6 +87,8 @@ const mapStateToProps = (state) => {
         radios: state.radiosReducer.radios,
         radiosSearched: state.radiosReducer.radiosSearched,
         audios: state.radiosReducer.audios,
+        radioPlaying: state.radiosReducer.radioPlaying,
+
     }
 }
 

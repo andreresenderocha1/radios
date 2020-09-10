@@ -12,6 +12,8 @@ import RadiosFavoritasBox from '../radiosbox/RadiosFavoritasBox';
 import {Link, Switch, Route, BrowserRouter} from 'react-router-dom';
 import Test from './Test';
 import Test2 from './Test2';
+import {connect} from 'react-redux';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,14 +55,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabsBar(props) {
+function TabsBar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState('one');
   const [reload, setReload] = React.useState('');
 
+
+
+
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    
+    setValue(newValue);   
+   
   };
 
 
@@ -102,3 +109,14 @@ export default function TabsBar(props) {
       </BrowserRouter>
   );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        radioPlaying: state.radiosReducer.radioPlaying,
+        audioToPlay: state.radiosReducer.audioToPlay
+    }
+}
+
+
+
+export default connect(mapStateToProps)(TabsBar)

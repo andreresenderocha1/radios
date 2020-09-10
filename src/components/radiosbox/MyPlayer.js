@@ -59,8 +59,6 @@ class MyPlayer extends React.Component {
               //clicou em outra radio... nao a que esta rodando
               onAudioPlayTrackChange(currentPlayId, audioLists, audioInfo) {
                   var audios = document.getElementsByTagName('audio');
-                  console.log(audios)
-                console.log('changed',audioInfo.name)
                 document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
                 _this.audio.pause()
               },
