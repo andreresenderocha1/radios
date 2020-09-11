@@ -67,3 +67,14 @@ code {
     box-shadow: none!important;
 }
 
+.react-jinke-music-player-mobile-cover .cover{
+    width: 101%!important;
+    height: 101%;
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+.react-jinke-music-player-main.light-theme .react-jinke-music-player-mobile-cover{
+    border: 5px solid #8e8e8eed!important;
+    box-shadow: 0 0 30px 2px rgb(0 0 0 / 76%)!important;
+}

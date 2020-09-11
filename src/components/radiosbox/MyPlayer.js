@@ -9,6 +9,13 @@ import {setAudioToPlay} from '../../actions/RadiosAction';
 var _this;
 class MyPlayer extends React.Component {  
 
+    audioList1 =  [{
+    
+        cover:
+        require('../../assets/radios-logos/viny.png'),
+         
+      },   
+       ]
         
         
          options = {
