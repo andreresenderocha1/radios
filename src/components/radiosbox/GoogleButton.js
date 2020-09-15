@@ -6,8 +6,10 @@ export default function GoogleButton() {
 
   return (
     <div style={styles.facebookButton}>
-        <FontAwesomeIcon style={styles.facebookIcon} icon={faGoogle} />
-        <span style={styles.txtFacebook}>Google</span>
+        <div style={styles.containerIcon}>
+            <FontAwesomeIcon style={styles.facebookIcon} icon={faGoogle} />
+        </div>
+        <span style={styles.txtFacebook}>Login com <span>Google</span></span>
     </div>
   );
 }
@@ -20,17 +22,26 @@ const styles = {
         textAlign: 'center',
         textDecoration: 'none',
         margin: '5px 2px',
-        background: 'rgb(199,46,27)',
+        background: '#DB4437',
         color: 'white',
         display: 'flex',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        borderRadius: '2px'
+        borderRadius: '2px',
+        boxShadow: '1px 4px 7px -3px rgba(0,0,0,0.75)'
     },
     txtFacebook: {
-        fontSize: '18px'
+        fontSize: '14px'
     },
     facebookIcon: {
-        fontSize: '22px'
+        fontSize: '19px',
+        position: 'relative',
+        top: '-8px'
+    },
+    containerIcon: {
+        marginLeft: '-50px',
+        width: '44px',
+        height: '33px',
+        background: '#c51b0d'
     }
 }

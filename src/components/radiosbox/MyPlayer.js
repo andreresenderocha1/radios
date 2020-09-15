@@ -5,6 +5,10 @@ import {addAudio, initializeAudios} from '../../actions/RadiosAction';
 import ReactJkMusicPlayer from 'my-customized-jinke-music-player';
 import "my-customized-jinke-music-player/assets/index.css";
 import {setAudioToPlay} from '../../actions/RadiosAction';
+import Slider from '@material-ui/core/Slider';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+
+
 
 var _this;
 class MyPlayer extends React.Component {  
@@ -48,13 +52,13 @@ class MyPlayer extends React.Component {
             showReload: true,  
             showDownload: false,  
             showPlayMode: false,  
-            showThemeSwitch: true,  
+            showThemeSwitch: false,  
             showLyric: true,  
             showDestroy: true,  
             extendsContent: null,  
-            defaultVolume: 1,  
+            defaultVolume: 4,  
             playModeShowTime: 600,  
-            loadAudioErrorPlayNext: true,  
+            loadAudioErrorPlayNext: false,  
             autoHiddenCover: false,  
             spaceBar: true,
             responsive: true,
@@ -66,7 +70,8 @@ class MyPlayer extends React.Component {
               //clicou em outra radio... nao a que esta rodando
               onAudioPlayTrackChange(currentPlayId, audioLists, audioInfo) {
                   var audios = document.getElementsByTagName('audio');
-                document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
+                  if(document.getElementsByName(audioInfo.name)[0])
+                    document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
                 _this.audio.pause()
               },
 
@@ -80,9 +85,15 @@ class MyPlayer extends React.Component {
               },
 
               onAudioPlay(audioInfo) {
-                console.log('audio play', audioInfo)
-              document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'inline';
+                
+                if(document.getElementsByName(audioInfo.name)[0])
+                    document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'inline';
               },
+              onAudioAbort(currentPlayId, audioLists, audioInfo) {
+                console.log('audio abort', currentPlayId, audioLists, audioInfo)
+              },
+
+                           
             
           }
 
@@ -101,8 +112,10 @@ class MyPlayer extends React.Component {
               },
             },
           }
-        
-          
+
+          static changeVolume(newValue){
+              _this.audio.volume = (newValue/100)
+          }
       
 
       static getAudio(name){
@@ -110,8 +123,7 @@ class MyPlayer extends React.Component {
             _this.audio.clear()
             _this.setState({
                 params: {
-                  ..._this.options,  
-                     
+                  ..._this.options,                       
                   audioLists: [
                     {
                       name: _this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
@@ -147,6 +159,7 @@ class MyPlayer extends React.Component {
                     params: {
                     ..._this.options,  
                         
+                    
                     audioLists: [..._this.state.params.audioLists,
                         {
                         name: _this.props.radioPlaying ? _this.props.radioPlaying.name : 'stop',
@@ -166,20 +179,15 @@ class MyPlayer extends React.Component {
                         }
                     
                     })
+                    
                     _this.audio.playByIndex(a)
                 })
             }else {
+                console.log(i)
                 igual ? _this.audio.play() : _this.audio.playByIndex(i)
+                
             }
-
-
-            // _this.audio.appendAudio(1, audioList2)
-            console.log(_this.audio)
-            // setTimeout(()=> _this.audio.playNext(),5000)
-            // _this.audio.clear()
-            // _this.audio.playNext()
           }     
-
       }
 
 
@@ -202,25 +210,50 @@ class MyPlayer extends React.Component {
 
     render(){
         return (
-            <>
-            
+            <div>
+         
               <ReactJkMusicPlayer 
-                {..._this.state.params}
-                
-                // playIndex={0}
+                {..._this.state.params}                
+        
               />
-              <button onClick={()=>this.audio.play()}>click</button>
               
-            
-            </>
+              
+   
+            </div>
             
         )    
     }
 }
 
-const styles = {
-    
-}
+const PrettoSlider = withStyles({
+    root: {
+      color: '#52af77',
+      height: 8,
+    },
+    thumb: {
+      height: 24,
+      width: 24,
+      backgroundColor: '#fff',
+      border: '2px solid currentColor',
+      marginTop: -8,
+      marginLeft: -12,
+      '&:focus, &:hover, &$active': {
+        boxShadow: 'inherit',
+      },
+    },
+    active: {},
+    valueLabel: {
+      left: 'calc(-50% + 4px)',
+    },
+    track: {
+      height: 8,
+      borderRadius: 4,
+    },
+    rail: {
+      height: 8,
+      borderRadius: 4,
+    },
+  })(Slider);
 
 const mapStateToProps = (state) => {
     return {

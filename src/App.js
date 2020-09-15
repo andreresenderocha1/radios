@@ -8,6 +8,7 @@ import DrawerCustomize from './components/radiosbox/DrawerCustomize';
 import {connect} from 'react-redux';
 import {addAudio, setUser} from './actions/RadiosAction';
 import MyPlayer from './components/radiosbox/MyPlayer';
+import MySlider from './components/radiosbox/MySlider';
 import firebase from 'firebase';
 
 firebase.initializeApp({
@@ -45,7 +46,9 @@ class App extends React.Component {
   return (
     <div style={styles.containerBody}>
         <HeadBar></HeadBar>
+        <MySlider></MySlider>
         <TabsBar ></TabsBar>
+        
         <MyPlayer></MyPlayer>
         <div style={styles.containerBody}>
             <div style={styles.containerContaint}>

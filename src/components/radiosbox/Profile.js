@@ -92,7 +92,7 @@ class Profile extends React.Component {
         return ( 
 
             
-           <div style={{minWidth:'267px'}}>        
+           <div style={{minWidth:'267px',padding:'10px'}}>        
                <div style={{display:'flex'}}>
                     <Avatar style={{cursor:'pointer',marginRight:'30px',background:'white'}} alt="Remy Sharp" src={ this.props.user.photoURL || 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'} />
                     <div style={{display:'flex',flexDirection:'column',justifyContent: 'center'}}>
@@ -100,7 +100,7 @@ class Profile extends React.Component {
                         <span>{this.props.user.email}</span>
                     </div>
                 </div>
-                <hr/>
+                <hr />
                 <div onClick={() => this.logout()} onMouseOver={this.changeBackground} onMouseLeave={this.changeBack} style={styles.itemProfile}>
                      <ExitToAppIcon style={{marginLeft:'15px'}} fontSize="big" />
                      <span style={{marginLeft:'10px'}}>Sair</span>

@@ -27,23 +27,34 @@ class RadiosBox extends React.Component{
     }
 
     componentDidUpdate(oldValue, newValue){
-        console.log('old = ',oldValue.radioPlaying.name)
-        console.log('new = ',this.props.radioPlaying.name)
-        
-        if(oldValue.radioPlaying.name == this.props.radioPlaying.name){
-        if(!this.isEmpty(this.props.radioPlaying)){
-            var radioPlaying = this.props.radioPlaying;
+    
+        if(this.props.radioPlaying){
+            if(oldValue.radioPlaying.name == this.props.radioPlaying.name){
+            if(!this.isEmpty(this.props.radioPlaying)){
+                var radioPlaying = this.props.radioPlaying;
+                
+            var images = document.getElementsByClassName('images')
             
-          var images = document.getElementsByClassName('images')
-          
-              Array.prototype.forEach.call(images, function(image) {      
-                 if (image.name == radioPlaying.name){
-                    image.style.display = 'inline'                     
-                 }
-      
-              });     
+                Array.prototype.forEach.call(images, function(image) {      
+                    if (image.name == radioPlaying.name){
+                        image.style.display = 'inline'                     
+                    }
+        
+                });     
+                }
             }
+        }else{
+            var radioPlaying = this.props.radioPlaying;
+                
+            var images = document.getElementsByClassName('images')
+            Array.prototype.forEach.call(images, function(image) {      
+                if (image.name == oldValue.radioPlaying.name){
+                    image.style.display = 'none'                     
+                }
+    
+            });    
         }
+    
     }
 
     componentDidMount(){

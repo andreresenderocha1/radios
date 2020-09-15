@@ -89,7 +89,6 @@ class LoginTab extends React.Component {
   return (
     <div>        
             
-             <hr style={styles.linha}/>
              {this.state.emailFail? 
              <div style={{textAlign: 'center'}} >
                  <span style={{color: 'red', fontWeight:'bold'}}>Email ou senha invalidos!</span>
