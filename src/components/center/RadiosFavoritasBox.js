@@ -1,18 +1,10 @@
 import React, {useEffect} from 'react';
-import {Styl} from 'react-dom';
-import Radio from './Radio';
 import CardRadio from './CardRadio';
-import DrawerCustomize from './DrawerCustomize';
-import data from '../../assets/radios.json';
 import firebase from 'firebase';
 import {connect} from 'react-redux';
 import {fetchRadios} from '../../actions/RadiosAction';
 
-
-
-
-class RadiosFavoritasBox extends React.Component {
-    
+class RadiosFavoritasBox extends React.Component {    
     constructor(props){
         super(props)
         this.state = {
@@ -21,7 +13,7 @@ class RadiosFavoritasBox extends React.Component {
         }
     }
    
-    getRadios(){      
+    getRadios(){              
         firebase.database().ref().child(firebase.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{  
             var array = []
             snapshot.forEach(item=>{  
@@ -42,14 +34,14 @@ class RadiosFavoritasBox extends React.Component {
         
     }
     componentDidMount(){
-        this.getRadios()       
-        
+        if(firebase.auth().currentUser){
+            this.getRadios();
+        }        
     }
 
     render(){
         return (
-            <div style={styles.radiosContainer}>
-                
+            <div style={styles.radiosContainer}>                
             {
             this.state.radiosFavoritas.map(function(radio){
                 return <CardRadio key={Math.random()} radio={radio} ></CardRadio>
@@ -79,8 +71,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchRadios: () => dispatch(fetchRadios())
-        
+        fetchRadios: () => dispatch(fetchRadios())        
     }
 }
 

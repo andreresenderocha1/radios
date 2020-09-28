@@ -22,7 +22,7 @@ code {
 .react-jinke-music-player-main .glass-bg {
     position: absolute;
     height: 95% !important;
-    top: 60px !important;
+    top: 57px !important;
     min-height: 480px;
 }
 
@@ -81,8 +81,9 @@ code {
 
 .react-jinke-music-player-mobile-progress .current-time{
     position: absolute;
-    top: -235px;
-    left: 106px;
+    top: -200px;
+    left: 108px;
+    font-size: 13px !important    
 }
 
 .react-jinke-music-player-main .music-player-panel .panel-content .player-content .play-sounds{
@@ -95,4 +96,21 @@ code {
 
 .rc-slider{
     display: none!important;
+}
+
+.react-jinke-music-player-mobile > .group{
+    margin-top: -56px !important;
+}
+
+.react-jinke-music-player-mobile-operation .items{
+    margin-top: -60px !important;
+}
+
+.react-jinke-music-player-mobile-header{
+    position: relative !important;
+    top: 60px !important;
+}
+
+.react-jinke-music-player-mobile-singer-name{
+    top: 50px !important
 }

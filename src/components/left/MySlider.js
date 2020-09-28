@@ -1,28 +1,20 @@
-import React, {Component} from 'react';
-import {Styl} from 'react-dom';
+import React from 'react';
 import {connect} from 'react-redux';
 import {addAudio, initializeAudios} from '../../actions/RadiosAction';
-import ReactJkMusicPlayer from 'my-customized-jinke-music-player';
 import "my-customized-jinke-music-player/assets/index.css";
 import {setAudioToPlay} from '../../actions/RadiosAction';
 import Slider from '@material-ui/core/Slider';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MyPlayer from './MyPlayer';
-
-
+import VolumeUp from '@material-ui/icons/VolumeUp';
 
 var _this;
 class MySlider extends React.Component {  
-
-    audioList1 =  [{
-    
+    audioList1 =  [{    
         cover:
-        require('../../assets/radios-logos/viny.png'),
-         
+        require('../../assets/radios-logos/viny.png'),         
       },   
-       ]
-      
-
+       ]    
           constructor(props) {
             super(props)
             this.audio = {}
@@ -41,21 +33,14 @@ class MySlider extends React.Component {
 
           handleChange(event, newValue){
              MyPlayer.changeVolume(newValue)
-          }
-      
+          }     
 
     render(){
         return (
-            <div>
             <div class='casa' style={styles.containerSlider}>
+                <VolumeUp style={{marginRight:'10px', marginLeft: '3px',color: 'white', fontSize: '22px'}} fontSize="big" />
             <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} onChange={this.handleChange} />
-            </div>
-        
-              
-              
-   
-            </div>
-            
+            </div>   
         )    
     }
 }
@@ -63,16 +48,18 @@ class MySlider extends React.Component {
 const styles = {
     containerSlider: {
         zIndex: '999999',
-    width: '213px',
-    position: 'relative',
-    top: '549px',
-    marginLeft: '56px'
+        width: '267px',
+        position: 'relative',
+        top: '739px',
+        marginLeft: '7px',
+        display: 'flex',
+        alignItems: 'center'
     }
 }
 
 const PrettoSlider = withStyles({
     root: {
-      color: '#52af77',
+      color: '#b5b5b5',
       height: 8,
     },
     thumb: {

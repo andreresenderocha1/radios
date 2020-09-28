@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import RadiosBox from '../radiosbox/RadiosBox';
-import RadiosFavoritasBox from '../radiosbox/RadiosFavoritasBox';
-import {Link, Switch, Route, BrowserRouter} from 'react-router-dom';
-import Test from './Test';
-import Test2 from './Test2';
+import RadiosBox from '../center/RadiosBox';
+import RadiosFavoritasBox from '../center/RadiosFavoritasBox';
+import {Link, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 
@@ -74,7 +71,7 @@ function TabsBar(props) {
   return (
     <BrowserRouter>
         <div className={classes.root}>
-          <AppBar style={{marginLeft:285}} position="static" color="default">
+          <AppBar style={{marginLeft:285, marginTop: '-37px'}} position="static" color="default">
             <Tabs
               value={value}
               onChange={handleChange}

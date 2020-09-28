@@ -1,22 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import FacebookButton from './FacebookButton';
 import GoogleButton from './GoogleButton';
 import LoginButton from './LoginButton';
-import InputUsuario from './InputUsuario';
-import InputSenha from './InputSenha';
 import firebase from 'firebase';
 import { Icon, Input } from 'semantic-ui-react'
-
-
-
 
 var _this;
 class LoginTab extends React.Component {
@@ -32,7 +19,6 @@ class LoginTab extends React.Component {
             emailFail: false
         }     
         _this = this;
-
     }
 
     login(e){
@@ -81,49 +67,45 @@ class LoginTab extends React.Component {
 
         }).catch((error)=>console.log( error))
     }
-    
-    componentDidMount(){
-    } 
-  
+     
     render(){
-  return (
-    <div>        
-            
-             {this.state.emailFail? 
-             <div style={{textAlign: 'center'}} >
-                 <span style={{color: 'red', fontWeight:'bold'}}>Email ou senha invalidos!</span>
-             </div>:null
-             }
-             
-             <div style={styles.containerInputs}>
-                <Input style={{marginBottom: '5px'}} onChange={(e)=> this.handleChange(e)} name='email' iconPosition='left' placeholder='Email'>
-                    <Icon name='user' />
-                    <input />
-                </Input>
-                <Input iconPosition='left' type='password' onChange={(e)=> this.handleChange(e)} name='password' placeholder='Senha'>
-                    <Icon name='lock' />
-                    <input />
-                </Input>
-                 <a href="#" style={styles.buttonLogin} onClick={(e)=>{this.login(e)}}>
-                     <LoginButton title='Login' />
-                 </a>
-                 <a href="#" style={{textAlign:'right'}}>
-                     esqueceu a senha?
-                 </a>
-             </div>
-             <div style={{display:'flex',alignItems: 'center', width: '100%'}}>
-                <hr style={styles.meiaLinha}/> <span>ou</span> <hr style={styles.meiaLinha}/>   
-             </div>
-             <div style={styles.containerButtons}>
-                <a href="#" style={{textDecoration: 'none', width: '100%'}} onClick={()=>{this.props.cliquei();this.facebookLogin()}}>
-                    <FacebookButton />
-                 </a>
-                 <a href="#" style={{textDecoration: 'none', width: '100%'}} onClick={()=>{this.props.cliquei();this.googleLogin()}}>
-                     <GoogleButton />
-                 </a>
-             </div>
-         </div>
-  );
+        return (
+            <div>   
+                {this.state.emailFail? 
+                <div style={{textAlign: 'center'}} >
+                    <span style={{color: 'red', fontWeight:'bold'}}>Email ou senha invalidos!</span>
+                </div>:null
+                }
+                
+                <div style={styles.containerInputs}>
+                    <Input style={{marginBottom: '5px'}} onChange={(e)=> this.handleChange(e)} name='email' iconPosition='left' placeholder='Email'>
+                        <Icon name='user' />
+                        <input />
+                    </Input>
+                    <Input iconPosition='left' type='password' onChange={(e)=> this.handleChange(e)} name='password' placeholder='Senha'>
+                        <Icon name='lock' />
+                        <input />
+                    </Input>
+                    <a href="#" style={styles.buttonLogin} onClick={(e)=>{this.login(e)}}>
+                        <LoginButton title='Login' />
+                    </a>
+                    <a href="#" style={{textAlign:'right'}}>
+                        esqueceu a senha?
+                    </a>
+                </div>
+                <div style={{display:'flex',alignItems: 'center', width: '100%'}}>
+                    <hr style={styles.meiaLinha}/> <span>ou</span> <hr style={styles.meiaLinha}/>   
+                </div>
+                <div style={styles.containerButtons}>
+                    <a href="#" style={{textDecoration: 'none', width: '100%'}} onClick={()=>{this.props.cliquei();this.facebookLogin()}}>
+                        <FacebookButton />
+                    </a>
+                    <a href="#" style={{textDecoration: 'none', width: '100%'}} onClick={()=>{this.props.cliquei();this.googleLogin()}}>
+                        <GoogleButton />
+                    </a>
+                </div>
+            </div>
+        );
     }
 }
 

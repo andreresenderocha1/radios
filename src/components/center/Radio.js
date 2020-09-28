@@ -1,21 +1,18 @@
-import React, {Component} from 'react';
-import {Styl} from 'react-dom';
+import React from 'react';
 
-class Test extends React.Component {
-    state = {play: false}
-
+class Radio extends React.Component {
+    state = {play: false}    
     audio = new Audio('https://servidor26.brlogic.com:8084/live?1595095084584')    
       
     togglePlay = () => {
         this.setState({ play: !this.state.play }, () => {
             this.state.play ? this.audio.play() : this.audio.pause();
-        });
+        });        
     }
 
     render(){
         return (
-            <div>
-                <p>test 1</p>
+            <div style={styles.radiosContainer} onClick={this.togglePlay}>                
             </div>
         );
     }
@@ -35,4 +32,4 @@ const styles = {
     }
 }
 
-export default Test;
+export default Radio;

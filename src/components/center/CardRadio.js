@@ -1,32 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import StarIcon from '@material-ui/icons/Star';
-import PlayCircleOutlineSharpIcon from '@material-ui/icons/PlayCircleOutlineSharp';
-import PauseCircleOutline from '@material-ui/icons/PauseCircleOutline';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import useStateWithCallback from 'use-state-with-callback';
 import PlayButton from './PlayButton';
 import FavoritoIcon from './FavoritoIcon';
-import firebase from 'firebase';
-import wavegif from './images/wave.gif';
+import wavegif from '../../assets/wave.gif';
 import {connect} from 'react-redux';
-import {setRadioPlaying, stopRadioPlaying} from '../../actions/RadiosAction';
-import MyPlayer from './MyPlayer';
-
-
+import {setRadioPlaying} from '../../actions/RadiosAction';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +48,7 @@ const styles = {
     root: {
         width: 195,
         height: 156,
-        margin: 10,
+        margin: 14,
         boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
         position: 'relative'
       },
@@ -145,7 +127,6 @@ class CardRadio extends React.Component {
         }
         return true;
     }
-
     
       componentDidMount(){
           if(!this.isEmpty(this.props.radioPlaying)){
@@ -172,19 +153,6 @@ class CardRadio extends React.Component {
       });      
 }
 
- showWave = (ev)=>{  
-    // console.log(firebase.auth().currentUser)    
-     
-    //  var images = document.getElementsByClassName('images')
-    //   Array.prototype.forEach.call(images, function(image) {      
-        
-    //     image.style.display = 'none'
-        
-    //   });
-    //   ev.target.parentNode.firstChild.style.display = 'inline'
-    //   this.setState({wave:true})
-   
-}
  hideWave = (ev)=>{ 
      console.log(ev.target)
     ev.target.parentNode.firstChild.style.display = 'none'
@@ -198,8 +166,7 @@ class CardRadio extends React.Component {
   return (
     <Card style={styles.root} >
       <PlayButton cliquei={()=>this.props.cliquei()} radio={this.props.radio} >
-          <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.props.stopRadioPlaying()}}  style={styles.displayFalse} class='images'  alt="wave"/>
-      
+          <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.props.stopRadioPlaying()}}  style={styles.displayFalse} class='images'  alt="wave"/>      
         <CardMedia
             name={this.props.radio.name}
             onClick={(ev)=>{this.props.setRadioPlaying(this.props.radio)}}
@@ -208,12 +175,8 @@ class CardRadio extends React.Component {
             title="Paella dish"
         />
       </PlayButton>
-      
-     
-      <CardActions style={styles.actionsButtons} disableSpacing>
-      
+      <CardActions style={styles.actionsButtons} disableSpacing>      
       <div style={styles.contentCard}>
-
         <div style={styles.info}>  
             <span style={styles.name}>{this.props.radio.name}</span>
             <span style={styles.local}>{this.props.radio.city }</span>
@@ -221,14 +184,8 @@ class CardRadio extends React.Component {
         <div>  
             <FavoritoIcon action={this.props.action} name={this.props.radio.name}  id={this.props.radio.id}/> 
         </div>
-        {/* <button onClick={()=>document.getElementsByName('Jovem Pan')[0].parentNode.firstChild.style.display = 'inline'}>click</button> */}
-      </div>
-      
-          
-      
-        
-      </CardActions>
-     
+      </div>          
+      </CardActions>     
     </Card>
   );
  }

@@ -1,24 +1,13 @@
-import React, {Component} from 'react';
-import {Styl} from 'react-dom';
+import React from 'react';
 import {connect} from 'react-redux';
-import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, closeLoginPopup} from '../../actions/RadiosAction';
-import MyPlayer from './MyPlayer';
+import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, closeLoginPopup} from '../../../actions/RadiosAction';
 import firebase from 'firebase';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import FacebookButton from './FacebookButton';
-import GoogleButton from './GoogleButton';
-import LoginButton from './LoginButton';
-import InputUsuario from './InputUsuario';
-import InputSenha from './InputSenha';
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Popup } from 'semantic-ui-react'
 import TabLogin from './TabLogin'
 
 
 var _this;
-class Login extends React.Component { 
-
-   
+class Login extends React.Component {    
     constructor(props){
         super(props)  
         this.login = this.login.bind(this)
@@ -30,7 +19,6 @@ class Login extends React.Component {
             password: ""
         }     
         _this = this;
-
     }
 
     login(e){
@@ -41,16 +29,13 @@ class Login extends React.Component {
     }
 
     signup(e){
-        e.preventDefault()
-        console.log(this.state.email)
-        console.log(this.state.password)
+        e.preventDefault()       
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(result => {
             console.log(result)
         })
     }
 
-    handleChange(e){
-       
+    handleChange(e){       
         this.setState({
             [e.target.name] : e.target.value
         })
@@ -67,24 +52,16 @@ class Login extends React.Component {
         var provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().signInWithPopup(provider).then((result)=>{
             window.location.reload(false);
-
         }).catch((error)=>console.log( error))
     }
-    
-    componentDidMount(){
-    } 
 
     render(){
         return ( 
             <div>
               <div style={{width:'100%', height:'50px', background:'lightgray'}}>
-
-</div>
-                <TabLogin cliquei={()=>this.props.cliquei()}/>
-                
             </div>
-    
-
+            <TabLogin cliquei={()=>this.props.cliquei()}/>                
+            </div>
         );
     }
 }
@@ -118,8 +95,7 @@ const styles = {
 }
 
     const mapStateToProps = (state) => {
-        return {
-        
+        return {        
             audios: state.radiosReducer.audios,
             audioToPlay: state.radiosReducer.audioToPlay,
             radioPlaying: state.radiosReducer.radioPlaying,

@@ -1,25 +1,16 @@
-import React, {Component} from 'react';
-import {Styl} from 'react-dom';
+import React from 'react';
 import {connect} from 'react-redux';
 import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic} from '../../actions/RadiosAction';
-import MyPlayer from './MyPlayer';
+import MyPlayer from '../left/MyPlayer';
 
 var _this;
-class PlayButton extends React.Component {
-    
-
+class PlayButton extends React.Component { 
     constructor(props){
         super(props)
         this.state = {play: false, audio: null, radioAtualPlaying: false}
         _this = this
-    }
-    
-    componentDidMount(){
-        
-       
-    }
+    }  
 
-      
      stopAllAudios(){
         this.props.audios.map(audio=>{
             audio.pause()
@@ -52,7 +43,6 @@ class PlayButton extends React.Component {
                                         this.props.setUrlToPlay(radio.url)
                                     }
                                 })
-                                // setTimeout(()=>this.props.audioToPlay.play(),2000)
                             }
                             
                         }
@@ -72,8 +62,6 @@ class PlayButton extends React.Component {
                             this.props.setUrlToPlay(radio.url)
                         }
                     })
-                    // setTimeout(()=>this.props.audioToPlay.play(),2000)
-                    // this.props.audioToPlay.play()
                     this.setState({play:true})
                     this.props.addAudio(audio) 
                 }
@@ -89,28 +77,16 @@ class PlayButton extends React.Component {
                         this.props.setUrlToPlay(radio.url)
                     }
                 })
-                // setTimeout(()=>this.props.audioToPlay.play(),2000)
                 this.setState({play:true})
                 this.props.addAudio(audio)
             }
     }
 
-    
-    func = ()=>{
-        
-    }
-
-
     render(){
-        return (
-          
+        return (          
                 <a href="#" onClick={(ev)=>{this.togglePlay(ev); }}>
-                {this.props.children}
-                
-            </a>
-          
-            
-            
+                {this.props.children}                
+            </a>    
         );
     }
 }

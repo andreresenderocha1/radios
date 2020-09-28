@@ -1,14 +1,10 @@
 import React from 'react';
-import RadiosBox from './components/radiosbox/RadiosBox';
-
-import HeadBar from './components/headbar/HeadBar';
-import TabsBar from './components/tabs/TabsBar';
-import SideContainer from './components/side/SideContainer';
-import DrawerCustomize from './components/radiosbox/DrawerCustomize';
+import TopContainer from './components/top/TopContainer';
+import TabsBar from './components/center/TabsBar';
 import {connect} from 'react-redux';
 import {addAudio, setUser} from './actions/RadiosAction';
-import MyPlayer from './components/radiosbox/MyPlayer';
-import MySlider from './components/radiosbox/MySlider';
+import MyPlayer from './components/left/MyPlayer';
+import MySlider from './components/left/MySlider';
 import firebase from 'firebase';
 
 firebase.initializeApp({
@@ -45,7 +41,7 @@ class App extends React.Component {
     render(){
   return (
     <div style={styles.containerBody}>
-        <HeadBar></HeadBar>
+        <TopContainer></TopContainer>
         <MySlider></MySlider>
         <TabsBar ></TabsBar>
         

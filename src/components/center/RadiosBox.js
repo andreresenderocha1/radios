@@ -1,14 +1,7 @@
-import React, {useEffect} from 'react';
-import {Styl} from 'react-dom';
-import Radio from './Radio';
+import React from 'react';
 import CardRadio from './CardRadio';
-import DrawerCustomize from './DrawerCustomize';
-import data from '../../assets/radios.json';
-import { render } from '@testing-library/react';
 import {connect} from 'react-redux';
 import {fetchRadios, searchRadios, initializeAudios} from '../../actions/RadiosAction';
-import MyPlayer from './MyPlayer';
-import TestSearch from '../headbar/TestSearch';
 
 
 var _this;
@@ -26,8 +19,7 @@ class RadiosBox extends React.Component{
         return true;
     }
 
-    componentDidUpdate(oldValue, newValue){
-    
+    componentDidUpdate(oldValue, newValue){    
         if(this.props.radioPlaying){
             if(oldValue.radioPlaying.name == this.props.radioPlaying.name){
             if(!this.isEmpty(this.props.radioPlaying)){
@@ -53,31 +45,25 @@ class RadiosBox extends React.Component{
                 }
     
             });    
-        }
-    
+        }    
     }
 
-    componentDidMount(){
-       
+    componentDidMount(){       
         this.props.searchRadios(this.props.radios, this.props.genre)      
     }
   
     render(){
-    return (
-            <div style={styles.radiosContainer}>
-                {/* <button onClick={()=>fire.child('radios').push({name: 'teste'})}>aaa</button> */}
-                
-            {
-            this.props.radiosSearched.map(function(radio){
-                return <CardRadio cliquei={()=>_this.props.cliquei()} key={Math.random()} radio={radio} ></CardRadio>
-            })}
-            <div name="classsss" style={{width:400,height:400}}>
-            
-            </div>
-
-            </div>
-    );
-        }
+        return (
+                <div style={styles.radiosContainer}>                    
+                {
+                this.props.radiosSearched.map(function(radio){
+                    return <CardRadio cliquei={()=>_this.props.cliquei()} key={Math.random()} radio={radio} ></CardRadio>
+                })}
+                <div name="classsss" style={{width:400,height:400}}>                
+                </div>
+                </div>
+        );
+    }
     
 }
 
@@ -87,9 +73,7 @@ const styles = {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'start',       
-        marginLeft: 288,
-        
-        
+        marginLeft: 288  
     }
 }
 
@@ -98,8 +82,7 @@ const mapStateToProps = (state) => {
         radios: state.radiosReducer.radios,
         radiosSearched: state.radiosReducer.radiosSearched,
         audios: state.radiosReducer.audios,
-        radioPlaying: state.radiosReducer.radioPlaying,
-
+        radioPlaying: state.radiosReducer.radioPlaying
     }
 }
 
@@ -107,8 +90,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchRadios: () => dispatch(fetchRadios()),
         searchRadios: (array, str) => dispatch(searchRadios(array, str)),
-        initializeAudios: () => dispatch(initializeAudios()),
-        
+        initializeAudios: () => dispatch(initializeAudios())        
     }
 }
 

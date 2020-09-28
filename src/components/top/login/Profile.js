@@ -1,24 +1,13 @@
 import React, {Component} from 'react';
-import {Styl} from 'react-dom';
 import {connect} from 'react-redux';
-import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, closeLoginPopup, setUser} from '../../actions/RadiosAction';
-import MyPlayer from './MyPlayer';
+import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, closeLoginPopup, setUser} from '../../../actions/RadiosAction';
 import firebase from 'firebase';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import FacebookButton from './FacebookButton';
-import GoogleButton from './GoogleButton';
-import LoginButton from './LoginButton';
-import InputUsuario from './InputUsuario';
-import InputSenha from './InputSenha';
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Popup } from 'semantic-ui-react'
 import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 var _this;
-class Profile extends React.Component { 
-
-   
+class Profile extends React.Component {    
     constructor(props){
         super(props)  
         this.login = this.login.bind(this)
@@ -29,8 +18,7 @@ class Profile extends React.Component {
             email: "",
             password: ""
         }     
-        _this = this;
-        
+        _this = this;       
 
     }
 
@@ -59,10 +47,7 @@ class Profile extends React.Component {
 
     googleLogin(){
         var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then((result)=>{
-            console.log('oii')
-            console.log(result)
-            console.log(firebase.auth().currentUser.displayName)
+        firebase.auth().signInWithPopup(provider).then((result)=>{        
             window.location.reload(false);
         }).catch((error)=>console.log( error))
     }
@@ -88,10 +73,9 @@ class Profile extends React.Component {
             this.props.cliquei();
         });
       }
-    render(){
-        return ( 
 
-            
+    render(){
+        return (             
            <div style={{minWidth:'267px',padding:'10px'}}>        
                <div style={{display:'flex'}}>
                     <Avatar style={{cursor:'pointer',marginRight:'30px',background:'white'}} alt="Remy Sharp" src={ this.props.user.photoURL || 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'} />
@@ -104,9 +88,7 @@ class Profile extends React.Component {
                 <div onClick={() => this.logout()} onMouseOver={this.changeBackground} onMouseLeave={this.changeBack} style={styles.itemProfile}>
                      <ExitToAppIcon style={{marginLeft:'15px'}} fontSize="big" />
                      <span style={{marginLeft:'10px'}}>Sair</span>
-                </div>
-               {/* <button onClick={()=>console.log(this.props.user)}></button> */}
-                 
+                </div>                 
             </div>
 
         );
@@ -145,33 +127,32 @@ const styles = {
         flexDirection: 'column',
         width: '100%',
         justifyContent: 'space-around'
-    }
-    
+    }    
 }
 
-    const mapStateToProps = (state) => {
-        return {
-        
-            audios: state.radiosReducer.audios,
-            audioToPlay: state.radiosReducer.audioToPlay,
-            radioPlaying: state.radiosReducer.radioPlaying,
-            radios: state.radiosReducer.radios,
-            urlToPlay: state.radiosReducer.urlToPlay,
-            user: state.radiosReducer.user
-        }
+const mapStateToProps = (state) => {
+    return {
+    
+        audios: state.radiosReducer.audios,
+        audioToPlay: state.radiosReducer.audioToPlay,
+        radioPlaying: state.radiosReducer.radioPlaying,
+        radios: state.radiosReducer.radios,
+        urlToPlay: state.radiosReducer.urlToPlay,
+        user: state.radiosReducer.user
     }
+}
 
-    const mapDispatchToProps = (dispatch) => {
-        return {
-            initializeAudios: () => dispatch(initializeAudios()),
-            addAudio: (audio) => dispatch(addAudio(audio)),
-            setAudioToPlay: (audio) => dispatch(setAudioToPlay(audio)),
-            setUrlToPlay: (url) => dispatch(setUrlToPlay(url)),
-            setPlayMusic: (bol) => dispatch(setPlayMusic(bol)),
-            closeLoginPopup: (bol) => dispatch(closeLoginPopup(bol)),
-            setUser: (user) => dispatch(setUser(user))
-        }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        initializeAudios: () => dispatch(initializeAudios()),
+        addAudio: (audio) => dispatch(addAudio(audio)),
+        setAudioToPlay: (audio) => dispatch(setAudioToPlay(audio)),
+        setUrlToPlay: (url) => dispatch(setUrlToPlay(url)),
+        setPlayMusic: (bol) => dispatch(setPlayMusic(bol)),
+        closeLoginPopup: (bol) => dispatch(closeLoginPopup(bol)),
+        setUser: (user) => dispatch(setUser(user))
     }
+}
 
-    export default connect(mapStateToProps,mapDispatchToProps)(Profile)
+export default connect(mapStateToProps,mapDispatchToProps)(Profile)
 
