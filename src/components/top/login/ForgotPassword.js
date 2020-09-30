@@ -5,12 +5,9 @@ import firebase from 'firebase';
 
 
 var _this;
-class Signup extends React.Component {
+class ForgotPassword extends React.Component {
     constructor(props){
-        super(props)  
-        // this.login = this.login.bind(this)
-        // this.signup = this.signup.bind(this)
-        // this.handleChange = this.handleChange.bind(this)
+        super(props);
         
         this.state = {
             email: "",
@@ -19,36 +16,42 @@ class Signup extends React.Component {
         _this = this;
     }
 
-    signup(e){    
-        e.preventDefault()
-        firebase.auth().createUserWithEmailAndPassword(_this.state.email, _this.state.password).then(result => {
-            firebase.auth().currentUser.sendEmailVerification().then(result => {
-                document.getElementById('infoLogin').style.display = 'flex'
-                document.getElementById('infoLogin').style.background = '#31b17b'
-                document.getElementById('infoLoginTxt').innerHTML = 'Conta cadastrada verifique seu email!'
-            });
-        }).catch(error => {
-            console.log(error)
+    handleVoltar(){
+        document.getElementById('esqueceuSenhaTab').style.display = 'none'
+        document.getElementById('loginTab').style.display = 'inline'
+        document.getElementById('cadastrarTab').style.display = 'inline'
+        document.getElementById('infoLogin').style.display = 'none'
+        document.getElementById('infoLogin').style.background = '#ff5858'
+        this.props.backForgotPassord();   
+    }
+
+    handleResetPassword(){
+        firebase.auth().sendPasswordResetEmail(this.state.email).then(function(){
+            console.log('ok reset')
+            document.getElementById('infoLogin').style.display = 'flex'
+            document.getElementById('infoLogin').style.background = '#31b17b'
+            document.getElementById('infoLoginTxt').innerHTML = 'Verifique seu email para resetar o password!'
+        }).catch(function(error){
+            console.log(error.code)
             if(error.code == 'auth/invalid-email'){                
                 document.getElementById('infoLogin').style.display = 'flex'
                 document.getElementById('infoLogin').style.background = '#ff5858'
                 document.getElementById('infoLoginTxt').innerHTML = 'Email inválido!'
             }
             
-            if(error.code == 'auth/email-already-in-use'){                
+            if(error.code == 'auth/user-not-found'){                
                 document.getElementById('infoLogin').style.display = 'flex'
                 document.getElementById('infoLogin').style.background = '#ff5858'
-                document.getElementById('infoLoginTxt').innerHTML = 'Email já cadastrado!'
+                document.getElementById('infoLoginTxt').innerHTML = 'Email não cadastrado!'
             }
         })
+            
     }
 
     handleChange(e){
+        this.setState({email: e.target.value})
         document.getElementById('infoLogin').style.display = 'none'
         document.getElementById('infoLogin').style.background = '#ff5858'
-        this.setState({
-            [e.target.name] : e.target.value
-        })
     }
    
     render(){
@@ -60,13 +63,14 @@ class Signup extends React.Component {
                         <Icon name='user' />
                         <input />
                     </Input>
-                    <Input iconPosition='left' name='password' placeholder='Senha' onChange={(e)=>this.handleChange(e)}>
-                        <Icon name='lock' />
-                        <input />
-                    </Input>
-                    <a href="#" style={styles.buttonLogin} onClick={this.signup}>
-                        <LoginButton title='Cadastrar' />
-                    </a>                        
+                   
+                    <a href="#" style={styles.buttonLogin} onClick={()=>this.handleResetPassword()}>
+                        <LoginButton title='Resetar Password' />
+                    </a>     
+
+                    <a href="#" onClick={()=>this.handleVoltar()}>
+                        voltar
+                    </a>                       
                 </div>
             </div>
         );
@@ -109,4 +113,4 @@ const styles = {
     
 }
 
-export default Signup;
+export default ForgotPassword;

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import LoginTab from './LoginTab';
 import Signup from './Signup';
+import ForgotPassword from './ForgotPassword';
 
 
 function TabPanel(props) {
@@ -58,6 +59,8 @@ export default function TabLogin(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    document.getElementById('infoLogin').style.display = 'none'
+    document.getElementById('infoLogin').style.background = '#ff5858'
   };
 
   const handleChangeIndex = (index) => {
@@ -75,8 +78,9 @@ export default function TabLogin(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Login" {...a11yProps(0)} />
-          <Tab label="Cadastrar" {...a11yProps(1)} />
+          <Tab label="Login" {...a11yProps(0)} id='loginTab'/>
+          <Tab label="Cadastrar" {...a11yProps(1)} id='cadastrarTab'/>
+          <Tab label="Esqueceu Senha" {...a11yProps(2)} style={{display:'none'}} id='esqueceuSenhaTab'/>
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -85,13 +89,20 @@ export default function TabLogin(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <LoginTab cliquei={()=>props.cliquei()}/>
+          <LoginTab cliquei={()=>props.cliquei()} forgotPassordFn={()=>handleChangeIndex(2)}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-            <Signup />
+            <Signup/>
         </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+            <ForgotPassword backForgotPassord={()=>handleChangeIndex(0)}/>
+        </TabPanel>
+       
         
-      </SwipeableViews>
+      </SwipeableViews>      
+      <div style={{width: '100%',height: '53px',background: '#ff5858', display:'none', justifyContent:'center', alignItems:'center'}} id='infoLogin'>
+          <p style={{fontSize: '18px', color: 'white'}} id='infoLoginTxt'></p>
+      </div>
     </div>
   );
 }

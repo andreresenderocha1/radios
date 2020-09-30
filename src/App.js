@@ -32,7 +32,11 @@ class App extends React.Component {
 
     authListener(){
         firebase.auth().onAuthStateChanged((user)=>{
-            this.props.setUser(user);
+            if(user && firebase.auth().currentUser.emailVerified){
+               this.props.setUser(user);
+            }else{
+                this.props.setUser(null); 
+            }
         })
     }
 

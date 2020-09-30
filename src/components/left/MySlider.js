@@ -7,6 +7,7 @@ import Slider from '@material-ui/core/Slider';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MyPlayer from './MyPlayer';
 import VolumeUp from '@material-ui/icons/VolumeUp';
+import VolumeOff from '@material-ui/icons/VolumeOff';
 
 var _this;
 class MySlider extends React.Component {  
@@ -33,13 +34,29 @@ class MySlider extends React.Component {
 
           handleChange(event, newValue){
              MyPlayer.changeVolume(newValue)
+             document.getElementById('volumeIconOff').style.display = 'none';
+             document.getElementById('volumeIconOn').style.display = 'inline';
           }     
+
+          handleMute(val){
+             if(val){
+                 document.getElementById('volumeIconOff').style.display = 'inline';
+                 document.getElementById('volumeIconOn').style.display = 'none';
+                 MyPlayer.changeVolume(0)
+             }else {
+                document.getElementById('volumeIconOff').style.display = 'none';
+                document.getElementById('volumeIconOn').style.display = 'inline';
+                MyPlayer.changeVolume(document.getElementById('volumeSlider').getElementsByTagName('input')[0].value)
+                
+             }
+          }
 
     render(){
         return (
             <div class='casa' style={styles.containerSlider}>
-                <VolumeUp style={{marginRight:'10px', marginLeft: '3px',color: 'white', fontSize: '22px'}} fontSize="big" />
-            <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} onChange={this.handleChange} />
+                <VolumeUp id='volumeIconOn' onClick={()=>this.handleMute(true)} style={{marginRight:'10px', marginLeft: '3px',color: 'white', fontSize: '22px', cursor:'pointer'}} fontSize="big" />
+                <VolumeOff id='volumeIconOff' onClick={()=>this.handleMute(false)} style={{display:'none', marginRight:'10px', marginLeft: '3px',color: 'white', fontSize: '22px', cursor:'pointer'}} fontSize="big" />
+                <PrettoSlider id='volumeSlider' valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={50} onChange={this.handleChange} />
             </div>   
         )    
     }

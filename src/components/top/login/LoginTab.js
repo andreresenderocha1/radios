@@ -21,18 +21,27 @@ class LoginTab extends React.Component {
         _this = this;
     }
 
-    login(e){
-        console.log('oi')
+    login(e){      
         e.preventDefault()
-        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(result => {
-            console.log(result)
-            this.props.cliquei();
-            window.location.reload(false);
-
-        }).catch(error => {
-            console.log(error)
+        if(this.state.email && this.state.password){
+            firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(result => {
+                if(firebase.auth().currentUser.emailVerified){
+                    this.props.cliquei();
+                    window.location.reload(false);
+                }else{
+                    document.getElementById('infoLogin').style.display = 'flex'
+                    document.getElementById('infoLogin').style.background = '#ff5858'
+                    document.getElementById('infoLoginTxt').innerHTML = 'Você precisa validar seu email antes.'
+                }                
+    
+            }).catch(error => {
+                console.log(error)
+                this.setState({emailFail: true})
+            })
+        }else {
             this.setState({emailFail: true})
-        })
+        }
+        
     }
 
     signup(e){
@@ -42,9 +51,9 @@ class LoginTab extends React.Component {
         })
     }
 
-    handleChange(e){
-        console.log(this.state.email)
-        console.log(this.state.password)
+    handleChange(e){     
+        document.getElementById('infoLogin').style.display = 'none'
+        document.getElementById('infoLogin').style.background = '#ff5858' 
         if(this.state.emailFail){
             this.setState({emailFail: false})
         }
@@ -66,6 +75,13 @@ class LoginTab extends React.Component {
             window.location.reload(false);
 
         }).catch((error)=>console.log( error))
+    }
+
+    handleForgotPassword(){
+        document.getElementById('esqueceuSenhaTab').style.display = 'inline'
+        document.getElementById('loginTab').style.display = 'none'
+        document.getElementById('cadastrarTab').style.display = 'none'
+        this.props.forgotPassordFn();        
     }
      
     render(){
@@ -89,7 +105,7 @@ class LoginTab extends React.Component {
                     <a href="#" style={styles.buttonLogin} onClick={(e)=>{this.login(e)}}>
                         <LoginButton title='Login' />
                     </a>
-                    <a href="#" style={{textAlign:'right'}}>
+                    <a href="#" onClick={()=>this.handleForgotPassword()} style={{textAlign:'right'}}>
                         esqueceu a senha?
                     </a>
                 </div>
