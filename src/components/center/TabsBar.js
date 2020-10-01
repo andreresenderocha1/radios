@@ -50,7 +50,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: '100%',
   },
+  indicator: {
+    backgroundColor: "rgb(233,111,111)",
+    height: "10px",
+    top: "45px"
+  },
+  tabsWrapper: {
+    height: "60px",
+    background: "rgb(233,111,111)"
+  },
+ 
 }));
+
+
+
 
 function TabsBar(props) {
   const classes = useStyles();
@@ -58,48 +71,52 @@ function TabsBar(props) {
   const [value, setValue] = React.useState('one');
   const [reload, setReload] = React.useState('');
 
-
-
-
-  const handleChange = (event, newValue) => {
-    
-    setValue(newValue);   
-   
+  const handleChange = (event, newValue) => {    
+    setValue(newValue);      
   };
 
-
+ 
   return (
     <BrowserRouter>
         <div className={classes.root}>
-          <AppBar style={{marginLeft:285, marginTop: '-37px'}} position="static" color="default">
+          <AppBar style={{marginLeft:285, marginTop: '-37px', backgroundColor: '#333333'}} position="static" color="default">
             <Tabs
+            TabIndicatorProps={{ className: classes.indicator }}
               value={value}
-              onChange={handleChange}
-              indicatorColor="primary"
-              textColor="primary"
+              onChange={handleChange}           
+              textColor="white"
               fullWidth
             >
-              <Tab value="one" label="Top 100" component={Link} to="/one" />
-              <Tab value="two" label="Favoritas"  />
-              <Tab value="three" label="Rock"  />
-              <Tab value="four" label="Sertanejo"  />
-              <Tab value="five" label="Pop"  />
+              <Tab style={{color:'#e2e2e2'}} value="one" label="Top 100" component={Link} to="/one" />
+              <Tab style={{color:'#e2e2e2'}} value="two" label="Favoritas"/>
+              <Tab style={{color:'#e2e2e2'}} value="three" label="Rock"/>
+              <Tab style={{color:'#e2e2e2'}} value="four" label="Sertaneja"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Pop"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Notícias"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Religião"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Gospel"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Esportes"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Alternativa"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Reggae"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Comunitárias"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="MPB"/>
+              <Tab style={{color:'#e2e2e2'}} value="five" label="Estados"/>
             </Tabs>
           </AppBar>
 
-          <TabPanel style={{overflowY:'auto',overflowX: 'hidden'}} value={value} index="one">
+          <TabPanel style={{overflowY:'auto',overflowX: 'hidden', marginLeft: '285px', backgroundColor: '#292929'}} value={value} index="one">
         <RadiosBox cliquei={()=>props.cliquei()} genre=''></RadiosBox>
       </TabPanel>
-      <TabPanel value={value} index="two">
+      <TabPanel style={{overflowY:'auto',overflowX: 'hidden', marginLeft: '285px', backgroundColor: '#292929'}} value={value} index="two">
         <RadiosFavoritasBox></RadiosFavoritasBox>
       </TabPanel>
-      <TabPanel value={value} index="three">
+      <TabPanel style={{overflowY:'auto',overflowX: 'hidden', marginLeft: '285px', backgroundColor: '#292929'}} value={value} index="three">
       <RadiosBox genre='rock_genre'></RadiosBox>
       </TabPanel>
-      <TabPanel value={value} index="four">
+      <TabPanel style={{overflowY:'auto',overflowX: 'hidden', marginLeft: '285px', backgroundColor: '#292929'}} value={value} index="four">
       <RadiosBox genre='sertanejo_genre'></RadiosBox>
       </TabPanel>
-      <TabPanel value={value} index="five">
+      <TabPanel style={{overflowY:'auto',overflowX: 'hidden', marginLeft: '285px', backgroundColor: '#292929'}} value={value} index="five">
       <RadiosBox genre='pop_genre'></RadiosBox>
       </TabPanel>
         </div>

@@ -72,8 +72,9 @@ const styles = {
         height:  994, 
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'start',       
-        marginLeft: 288  
+        justifyContent: 'center',       
+        marginLeft: '100px',
+        marginRight: '80px'  
     }
 }
 

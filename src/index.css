@@ -114,3 +114,7 @@ code {
 .react-jinke-music-player-mobile-singer-name{
     top: 50px !important
 }
+
+.ui.top.left.popup{
+    border: 3px solid #E96F6F
+}

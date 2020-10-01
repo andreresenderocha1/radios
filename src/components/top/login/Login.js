@@ -4,6 +4,7 @@ import {addAudio, initializeAudios, setAudioToPlay, setUrlToPlay, setPlayMusic, 
 import firebase from 'firebase';
 import 'semantic-ui-css/semantic.min.css'
 import TabLogin from './TabLogin'
+import logo from '../../../assets/logo.png';
 
 
 var _this;
@@ -60,8 +61,9 @@ class Login extends React.Component {
     render(){
         return ( 
             <div>
-              <div style={{width:'100%', height:'50px', background:'lightgray'}}>
-            </div>
+                <div style={{width:'100%', height:'59px', background:'#3c3c3c', display:'flex'}}>
+                    <img src={logo} style={{marginLeft: '78px'}}/>    
+                </div>
             <TabLogin cliquei={()=>this.props.cliquei()}/>                
             </div>
         );

@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {closeLoginPopup, fetchRadios} from '../../actions/RadiosAction';
 import firebase from 'firebase';
 import Avatar from '@material-ui/core/Avatar';
-import logo from '../../assets/logo.JPG';
+import logo from '../../assets/logo.png';
 
 
 var _this;
@@ -45,7 +45,7 @@ class TopContainer extends React.Component {
                 >cadastrar</button> */}
 
                 {/* <span style={styles.logoName}>Radios Brasil</span>     */}
-                <img src={logo} style={{width: '288px', height: '86px', marginLeft: '-3px'}}/>    
+                <img src={logo} style={{marginLeft: '32px'}}/>    
                 <SearchInput></SearchInput>
                 <div style={{display:'flex', alignItems:'center', minWidth:'300px', justifyContent:'flex-end'}}>
                 {this.props.user?<span style={{marginRight: '10px',color:'#c7c7c7'}}>{this.props.user.email}</span>:null}

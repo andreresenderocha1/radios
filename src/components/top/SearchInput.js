@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
+import Input from '@material-ui/core/Input';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import {connect} from 'react-redux';
@@ -13,15 +14,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     height: 32,
-    marginRight: -59
+    marginRight: -317,
+    backgroundColor: '#1f1d1d',
+    width: '300px'
   },
   input: {
     width: '500px',
     height: '41px',
     borderRadius: '2px',
+    color: '#d6d6d6',
+    paddingLeft: '10px'
   },
   iconButton: {
     padding: 10,
+    color: '#d6d6d6'
   },
   divider: {
     height: 28,
