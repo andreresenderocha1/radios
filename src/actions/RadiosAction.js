@@ -63,9 +63,7 @@ export const fetchRadios = ()=>{
             var radiosArray = []
             var audiosArray = []
             Object.keys(snapshot.val()).map(radio=>{
-                radiosArray.push(snapshot.val()[radio]);
-               
-                
+                radiosArray.push({key: radio, ...snapshot.val()[radio]});
             })
             
             dispatch(fetchRadiosSuccess(radiosArray))
@@ -74,8 +72,7 @@ export const fetchRadios = ()=>{
     }
 }
 
-export const searchRadios = (radios, str) => {
-  
+export const searchRadios = (radios, str) => {  
     return (dispatch) => {
         if (radios){
             var arrayName = []

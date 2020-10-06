@@ -25,10 +25,9 @@ class FavoritoIcon extends React.Component {
         firebase.database().ref().child(firebase.auth().currentUser.uid).child('RadiosFavoritas').on('value', snapshot=>{
             const radios = snapshot.val();            
             if(radios != null){
-                Object.keys(radios).map(key=> {
+                Object.keys(radios).map(key=> {                    
                     if (radios[key].id == this.props.id){
                         this.setState({isChecked: true, key: key})
-
                     }
                 })
             }
@@ -39,15 +38,22 @@ class FavoritoIcon extends React.Component {
       return (        
         <a href="#" onClick={()=>{
             if(this.state.isChecked){
+                if(this.props.likes == 0){
+                    firebase.database().ref().child('radios').child(this.props.radioKey).update({likes: 0})
+                }else{
+                    firebase.database().ref().child('radios').child(this.props.radioKey).update({likes: this.props.likes-1})
+                }
+                
                 firebase.database().ref().child(firebase.auth().currentUser.uid).child(`RadiosFavoritas/${this.state.key}`).remove();    
             }else{
+                firebase.database().ref().child('radios').child(this.props.radioKey).update({likes: this.props.likes+1})
                 firebase.database().ref().child(firebase.auth().currentUser.uid).child("RadiosFavoritas").push({id:this.props.id, name: this.props.name})
             }           
             this.setState({ isChecked: !this.state.isChecked })}}>
           { this.state.isChecked
             ?<Solid.Heart size={28} color='#ED4956'/>            
             :<Regular.Heart size={28} color='lightgray'/>            
-          }          
+          }                    
           </a>     
       );      
     }  

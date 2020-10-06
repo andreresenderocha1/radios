@@ -130,18 +130,14 @@ class CardRadio extends React.Component {
     
       componentDidMount(){
           if(!this.isEmpty(this.props.radioPlaying)){
-              var radioPlaying = this.props.radioPlaying;
-              
-            var images = document.getElementsByClassName('images')
-            
-                Array.prototype.forEach.call(images, function(image) {      
-                   if (image.name == radioPlaying.name){
-                    //   image.style.display = 'inline'                     
-                   }
-        
-                });     
-          }
-          
+              var radioPlaying = this.props.radioPlaying;              
+              var images = document.getElementsByClassName('images')            
+                  Array.prototype.forEach.call(images, function(image) {      
+                  if (image.name == radioPlaying.name){
+                      //   image.style.display = 'inline'                     
+                  }        
+              });    
+          }          
       }
  
    hideAllWaves = ()=>{
@@ -166,7 +162,7 @@ class CardRadio extends React.Component {
   return (
     <Card style={styles.root} >
       <PlayButton cliquei={()=>this.props.cliquei()} radio={this.props.radio} >
-          <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.props.stopRadioPlaying()}}  style={styles.displayFalse} class='images'  alt="wave"/>      
+          <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.props.stopRadioPlaying()}}  style={styles.displayFalse} class='images'  alt="wave"/>   
         <CardMedia
             name={this.props.radio.name}
             onClick={(ev)=>{this.props.setRadioPlaying(this.props.radio)}}
@@ -181,8 +177,10 @@ class CardRadio extends React.Component {
             <span style={styles.name}>{this.props.radio.name}</span>
             <span style={styles.local}>{this.props.radio.city }</span>
         </div>
-        <div>  
-            <FavoritoIcon action={this.props.action} name={this.props.radio.name}  id={this.props.radio.id}/> 
+        <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', alignItems:'center'}}>  
+            <FavoritoIcon likes={this.props.radio.likes} radioKey={this.props.radio.key} action={this.props.action} name={this.props.radio.name}  id={this.props.radio.id}/> 
+            <span style={{marginTop: '-4px'}}>{this.props.radio.likes}</span>
+            {/* <button onClick={()=>console.log(this)}>click</button> */}
         </div>
       </div>          
       </CardActions>     
