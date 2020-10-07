@@ -56,22 +56,27 @@ class MyPlayer extends React.Component {
             spaceBar: true,
             responsive: true,
           
-            onAudioPlayTrackChange(currentPlayId, audioLists, audioInfo) {
+            onAudioPlayTrackChange(currentPlayId, audioLists, audioInfo) {   
+                document.getElementsByName(_this.props.radioPlaying.name)[0].parentNode.getElementsByTagName('div')[2].style.opacity = '0.5'
+                // document.getElementsByName(_this.props.radioPlaying.name)[0].parentNode.style.opacity = '0.5'            
+                document.getElementsByName(_this.props.radioPlaying.name)[0].parentNode.firstChild.style.display = 'inline';
                 document.getElementsByClassName('current-time')[0].style.display = 'none';
                 var audios = document.getElementsByTagName('audio');
-                if(document.getElementsByName(audioInfo.name)[0]){
-                    document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
+                if(document.getElementsByName(audioInfo.name)[0]){                    
+                    document.getElementsByName(audioInfo.name)[0].parentNode.getElementsByTagName('img')[0].style.display = 'none'
                 }
             _this.audio.pause()
             },
 
             onAudioPause(audioInfo) {
-                document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
+                // document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'none';
             },
 
-            onAudioPlay(audioInfo) {            
+            onAudioPlay(audioInfo) {    
+                document.getElementsByName(_this.props.radioPlaying.name)[0].parentNode.getElementsByTagName('div')[2].style.opacity = '1'
+                document.getElementsByName(_this.props.radioPlaying.name)[0].parentNode.firstChild.style.display = 'none';      
                 if(document.getElementsByName(audioInfo.name)[0]){
-                    document.getElementsByName(audioInfo.name)[0].parentNode.firstChild.style.display = 'inline';
+                    document.getElementsByName(audioInfo.name)[0].parentNode.getElementsByTagName('img')[0].style.display = 'inline'
                     document.getElementsByClassName('current-time')[0].style.display = 'inline';
                     
                 }

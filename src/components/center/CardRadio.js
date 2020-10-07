@@ -9,6 +9,7 @@ import FavoritoIcon from './FavoritoIcon';
 import wavegif from '../../assets/wave.gif';
 import {connect} from 'react-redux';
 import {setRadioPlaying} from '../../actions/RadiosAction';
+import ReactLoading from 'react-loading';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,11 +113,14 @@ const styles = {
   
   };  
   
+
 var _this;
 class CardRadio extends React.Component {      
     constructor(props) {
         super(props);  
-        this.state = {wave: false}  
+        this.state = {
+            loading: ''
+        }  
         _this = this;
       } 
 
@@ -129,6 +133,10 @@ class CardRadio extends React.Component {
     }
     
       componentDidMount(){
+         var spinners = document.getElementsByClassName('spinner')
+         Array.prototype.forEach.call(spinners, function(item) {  
+            item.style.display = 'none'
+         })
           if(!this.isEmpty(this.props.radioPlaying)){
               var radioPlaying = this.props.radioPlaying;              
               var images = document.getElementsByClassName('images')            
@@ -157,11 +165,13 @@ class CardRadio extends React.Component {
 }
 
 
-
  render(){
   return (
     <Card style={styles.root} >
-      <PlayButton cliquei={()=>this.props.cliquei()} radio={this.props.radio} >
+      <PlayButton cliquei={()=>{this.props.cliquei();}} radio={this.props.radio} name={this.props.radio.name}>     
+            <div style={{position:'absolute',marginLeft: '63px', marginTop: '23px'}} class='spinner' name={this.props.radio.name}>
+              <ReactLoading type='spinningBubbles' color="#000000" />              
+            </div>
           <img name={this.props.radio.name} src={wavegif}  onClick={(ev)=>{this.props.stopRadioPlaying()}}  style={styles.displayFalse} class='images'  alt="wave"/>   
         <CardMedia
             name={this.props.radio.name}
