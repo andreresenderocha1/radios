@@ -10,7 +10,9 @@ const initialState = {
     urlToPlay: '',
     playMusic: false,
     user: {},
-    loginPopupFlag: true
+    loginPopupFlag: true,
+    tab: 'Top 100',
+    tabEstadoLabel: ''
 }
 
 
@@ -84,6 +86,18 @@ const radiosReducer =  (state = initialState, action) => {
                     ...state,
                     loginPopupFlag: action.payload
                     }
+                    case "SET_TAB":
+            
+                        return { 
+                        ...state,
+                        tab: action.payload
+                        }
+                        case "SET_TAB_ESTADO_LABEL":
+            
+                            return { 
+                            ...state,
+                            tabEstadoLabel: action.payload
+                            }
             
         
       default:

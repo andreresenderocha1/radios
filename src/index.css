@@ -118,3 +118,16 @@ code {
 .ui.top.left.popup{
     border: 3px solid #E96F6F
 }
+
+.MuiAppBar-root{
+    width: auto!important;
+}
+
+.MuiTabScrollButton-root.Mui-disabled{
+    position: absolute;
+}
+
+.MuiSvgIcon-fontSizeSmall{
+    color: #E96F6F;
+    font-size: 26px!important;
+}

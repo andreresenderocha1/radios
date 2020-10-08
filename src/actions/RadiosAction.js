@@ -57,6 +57,16 @@ export const closeLoginPopup = (bol) => ({
     payload: bol
 });
 
+export const setTab = (index) => ({
+    type: "SET_TAB",
+    payload: index
+});
+
+export const setTabEstadoLabel = (label) => ({
+    type: "SET_TAB_ESTADO_LABEL",
+    payload: label
+});
+
 export const fetchRadios = ()=>{
     return (dispatch)=>{
         firebase.database().ref().child('radios').on('value', snapshot=>{
